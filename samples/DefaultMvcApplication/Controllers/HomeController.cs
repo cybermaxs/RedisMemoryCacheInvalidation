@@ -10,23 +10,25 @@ namespace DefaultMvcApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private const string childkey = "notexpirablekey";
         private const string parentkey = "mynotifmessage";
 
         public ActionResult Index()
         {
             var cache = MemoryCache.Default;
-            if (!cache.Contains(childkey))
+
+            var cacheItem = new CacheItem("onekey", DateTime.Now);
+            if (!cache.Contains(cacheItem.Key))
             {
                 var policy = new CacheItemPolicy();
                 policy.ChangeMonitors.Add(CacheInvalidation.CreateChangeMonitor(parentkey));
-                policy.AbsoluteExpiration = DateTime.Now.AddYears(1);
-                cache.Add(childkey, DateTime.Now, policy);
+                policy.AbsoluteExpiration = DateTime.Now.AddYears(1); // just to create not expirable item
+                MemoryCache.Default.Add(cacheItem, policy);
             }
 
-            DateTime dt = (DateTime)cache[childkey];
 
-            ViewBag.Message = string.Format("'{0}' was set at {1}", childkey, dt.ToLongTimeString());
+            DateTime dt = (DateTime)cache[cacheItem.Key];
+
+            ViewBag.Message = string.Format("'{0}' was set at {1}", cacheItem.Key, dt.ToLongTimeString());
 
             return View();
         }
