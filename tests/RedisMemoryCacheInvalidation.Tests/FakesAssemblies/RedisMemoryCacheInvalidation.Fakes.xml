@@ -1,0 +1,926 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RedisMemoryCacheInvalidation.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1">
+            <summary>Shim type of RedisMemoryCacheInvalidation.Configuration.ConfigurationProvider`1</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.#ctor(RedisMemoryCacheInvalidation.Configuration.ConfigurationProvider{`0})">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.ConstructorString">
+            <summary>Sets the shim of ConfigurationProvider`1.ConfigurationProvider`1(String sectionName)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.GetSection">
+            <summary>Sets the shim of ConfigurationProvider`1.GetSection()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.Read">
+            <summary>Sets the shim of ConfigurationProvider`1.Read()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.SetConfigurationFileString">
+            <summary>Sets the shim of ConfigurationProvider`1.SetConfigurationFile(String file)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.AllInstances.GetSection">
+            <summary>Sets the shim of ConfigurationProvider`1.GetSection()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.AllInstances.Read">
+            <summary>Sets the shim of ConfigurationProvider`1.Read()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimConfigurationProvider`1.AllInstances.SetConfigurationFileString">
+            <summary>Sets the shim of ConfigurationProvider`1.SetConfigurationFile(String file)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection">
+            <summary>Shim type of RedisMemoryCacheInvalidation.Configuration.RedisConfigurationSection</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.#ctor(RedisMemoryCacheInvalidation.Configuration.RedisConfigurationSection)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllowAdminGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_AllowAdmin()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllowAdminSetBoolean">
+            <summary>Sets the shim of RedisConfigurationSection.set_AllowAdmin(Boolean value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.Constructor">
+            <summary>Sets the shim of RedisConfigurationSection.RedisConfigurationSection()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.HostGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Host()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.HostSetString">
+            <summary>Sets the shim of RedisConfigurationSection.set_Host(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.IOTimeoutGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_IOTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.IOTimeoutSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_IOTimeout(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.MaxUnsentGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_MaxUnsent()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.MaxUnsentSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_MaxUnsent(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.PasswordGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Password()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.PasswordSetString">
+            <summary>Sets the shim of RedisConfigurationSection.set_Password(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.PortGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Port()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.PortSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_Port(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.SyncTimeoutGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_SyncTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.SyncTimeoutSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_SyncTimeout(Int32 value)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.AllowAdminGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_AllowAdmin()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.AllowAdminSetBoolean">
+            <summary>Sets the shim of RedisConfigurationSection.set_AllowAdmin(Boolean value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.HostGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Host()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.HostSetString">
+            <summary>Sets the shim of RedisConfigurationSection.set_Host(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.IOTimeoutGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_IOTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.IOTimeoutSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_IOTimeout(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.MaxUnsentGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_MaxUnsent()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.MaxUnsentSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_MaxUnsent(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.PasswordGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Password()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.PasswordSetString">
+            <summary>Sets the shim of RedisConfigurationSection.set_Password(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.PortGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_Port()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.PortSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_Port(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.SyncTimeoutGet">
+            <summary>Sets the shim of RedisConfigurationSection.get_SyncTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.ShimRedisConfigurationSection.AllInstances.SyncTimeoutSetInt32">
+            <summary>Sets the shim of RedisConfigurationSection.set_SyncTimeout(Int32 value)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection">
+            <summary>Stub type of RedisMemoryCacheInvalidation.Configuration.RedisConfigurationSection</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.DeserializeElement(System.Xml.XmlReader,System.Boolean)">
+            <summary>Sets the stub of ConfigurationElement.DeserializeElement(XmlReader reader, Boolean serializeCollectionKey)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.DeserializeElementXmlReaderBoolean">
+            <summary>Sets the stub of ConfigurationElement.DeserializeElement(XmlReader reader, Boolean serializeCollectionKey)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.DeserializeSection(System.Xml.XmlReader)">
+            <summary>Sets the stub of ConfigurationSection.DeserializeSection(XmlReader reader)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.DeserializeSectionXmlReader">
+            <summary>Sets the stub of ConfigurationSection.DeserializeSection(XmlReader reader)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ElementPropertyGet">
+            <summary>Sets the stub of ConfigurationElement.get_ElementProperty()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Equals(System.Object)">
+            <summary>Sets the stub of ConfigurationElement.Equals(Object compareTo)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.EqualsObject">
+            <summary>Sets the stub of ConfigurationElement.Equals(Object compareTo)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetHashCode">
+            <summary>Sets the stub of ConfigurationElement.GetHashCode()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetHashCode01">
+            <summary>Sets the stub of ConfigurationElement.GetHashCode()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetRuntimeObject">
+            <summary>Sets the stub of ConfigurationSection.GetRuntimeObject()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetRuntimeObject01">
+            <summary>Sets the stub of ConfigurationSection.GetRuntimeObject()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetTransformedAssemblyString(System.String)">
+            <summary>Sets the stub of ConfigurationElement.GetTransformedAssemblyString(String assemblyName)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetTransformedAssemblyStringString">
+            <summary>Sets the stub of ConfigurationElement.GetTransformedAssemblyString(String assemblyName)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetTransformedTypeString(System.String)">
+            <summary>Sets the stub of ConfigurationElement.GetTransformedTypeString(String typeName)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.GetTransformedTypeStringString">
+            <summary>Sets the stub of ConfigurationElement.GetTransformedTypeString(String typeName)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Init">
+            <summary>Sets the stub of ConfigurationElement.Init()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Init01">
+            <summary>Sets the stub of ConfigurationElement.Init()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.InitializeDefault">
+            <summary>Sets the stub of ConfigurationElement.InitializeDefault()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.InitializeDefault01">
+            <summary>Sets the stub of ConfigurationElement.InitializeDefault()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.InitializeStub">
+            <summary>Initializes a new instance of type StubRedisConfigurationSection</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.IsModified">
+            <summary>Sets the stub of ConfigurationSection.IsModified()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.IsModified01">
+            <summary>Sets the stub of ConfigurationSection.IsModified()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.IsReadOnly">
+            <summary>Sets the stub of ConfigurationElement.IsReadOnly()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.IsReadOnly01">
+            <summary>Sets the stub of ConfigurationElement.IsReadOnly()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ListErrors(System.Collections.IList)">
+            <summary>Sets the stub of ConfigurationElement.ListErrors(IList errorList)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ListErrorsIList">
+            <summary>Sets the stub of ConfigurationElement.ListErrors(IList errorList)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnDeserializeUnrecognizedAttribute(System.String,System.String)">
+            <summary>Sets the stub of ConfigurationElement.OnDeserializeUnrecognizedAttribute(String name, String value)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnDeserializeUnrecognizedAttributeStringString">
+            <summary>Sets the stub of ConfigurationElement.OnDeserializeUnrecognizedAttribute(String name, String value)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnDeserializeUnrecognizedElement(System.String,System.Xml.XmlReader)">
+            <summary>Sets the stub of ConfigurationElement.OnDeserializeUnrecognizedElement(String elementName, XmlReader reader)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnDeserializeUnrecognizedElementStringXmlReader">
+            <summary>Sets the stub of ConfigurationElement.OnDeserializeUnrecognizedElement(String elementName, XmlReader reader)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnRequiredPropertyNotFound(System.String)">
+            <summary>Sets the stub of ConfigurationElement.OnRequiredPropertyNotFound(String name)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.OnRequiredPropertyNotFoundString">
+            <summary>Sets the stub of ConfigurationElement.OnRequiredPropertyNotFound(String name)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.PostDeserialize">
+            <summary>Sets the stub of ConfigurationElement.PostDeserialize()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.PostDeserialize01">
+            <summary>Sets the stub of ConfigurationElement.PostDeserialize()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.PreSerialize(System.Xml.XmlWriter)">
+            <summary>Sets the stub of ConfigurationElement.PreSerialize(XmlWriter writer)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.PreSerializeXmlWriter">
+            <summary>Sets the stub of ConfigurationElement.PreSerialize(XmlWriter writer)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.PropertiesGet">
+            <summary>Sets the stub of ConfigurationElement.get_Properties()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Reset(System.Configuration.ConfigurationElement)">
+            <summary>Sets the stub of ConfigurationElement.Reset(ConfigurationElement parentElement)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ResetConfigurationElement">
+            <summary>Sets the stub of ConfigurationElement.Reset(ConfigurationElement parentElement)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ResetModified">
+            <summary>Sets the stub of ConfigurationSection.ResetModified()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ResetModified01">
+            <summary>Sets the stub of ConfigurationSection.ResetModified()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeElement(System.Xml.XmlWriter,System.Boolean)">
+            <summary>Sets the stub of ConfigurationElement.SerializeElement(XmlWriter writer, Boolean serializeCollectionKey)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeElementXmlWriterBoolean">
+            <summary>Sets the stub of ConfigurationElement.SerializeElement(XmlWriter writer, Boolean serializeCollectionKey)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeSection(System.Configuration.ConfigurationElement,System.String,System.Configuration.ConfigurationSaveMode)">
+            <summary>Sets the stub of ConfigurationSection.SerializeSection(ConfigurationElement parentElement, String name, ConfigurationSaveMode saveMode)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeSectionConfigurationElementStringConfigurationSaveMode">
+            <summary>Sets the stub of ConfigurationSection.SerializeSection(ConfigurationElement parentElement, String name, ConfigurationSaveMode saveMode)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeToXmlElement(System.Xml.XmlWriter,System.String)">
+            <summary>Sets the stub of ConfigurationElement.SerializeToXmlElement(XmlWriter writer, String elementName)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SerializeToXmlElementXmlWriterString">
+            <summary>Sets the stub of ConfigurationElement.SerializeToXmlElement(XmlWriter writer, String elementName)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SetReadOnly">
+            <summary>Sets the stub of ConfigurationElement.SetReadOnly()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.SetReadOnly01">
+            <summary>Sets the stub of ConfigurationElement.SetReadOnly()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializeElementInTargetVersion(System.Configuration.ConfigurationElement,System.String,System.Runtime.Versioning.FrameworkName)">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializeElementInTargetVersion(ConfigurationElement element, String elementName, FrameworkName targetFramework)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializeElementInTargetVersionConfigurationElementStringFrameworkName">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializeElementInTargetVersion(ConfigurationElement element, String elementName, FrameworkName targetFramework)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializePropertyInTargetVersion(System.Configuration.ConfigurationProperty,System.String,System.Runtime.Versioning.FrameworkName,System.Configuration.ConfigurationElement)">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializePropertyInTargetVersion(ConfigurationProperty property, String propertyName, FrameworkName targetFramework, ConfigurationElement parentConfigurationElement)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializePropertyInTargetVersionConfigurationPropertyStringFrameworkNameConfigurationElement">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializePropertyInTargetVersion(ConfigurationProperty property, String propertyName, FrameworkName targetFramework, ConfigurationElement parentConfigurationElement)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializeSectionInTargetVersion(System.Runtime.Versioning.FrameworkName)">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializeSectionInTargetVersion(FrameworkName targetFramework)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ShouldSerializeSectionInTargetVersionFrameworkName">
+            <summary>Sets the stub of ConfigurationSection.ShouldSerializeSectionInTargetVersion(FrameworkName targetFramework)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Unmerge(System.Configuration.ConfigurationElement,System.Configuration.ConfigurationElement,System.Configuration.ConfigurationSaveMode)">
+            <summary>Sets the stub of ConfigurationElement.Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.UnmergeConfigurationElementConfigurationElementConfigurationSaveMode">
+            <summary>Sets the stub of ConfigurationElement.Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.ElementProperty">
+            <summary>Sets the stub of ConfigurationElement.get_ElementProperty()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Configuration.Fakes.StubRedisConfigurationSection.Properties">
+            <summary>Sets the stub of ConfigurationElement.get_Properties()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation">
+            <summary>Shim type of RedisMemoryCacheInvalidation.CacheInvalidation</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.CreateChangeMonitorString">
+            <summary>Sets the shim of CacheInvalidation.CreateChangeMonitor(String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.StaticConstructor">
+            <summary>Sets the shim of CacheInvalidation.CacheInvalidation()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.UseRedis">
+            <summary>Sets the shim of CacheInvalidation.UseRedis()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimCacheInvalidation.UseRedisRedisConnectionInfo">
+            <summary>Sets the shim of CacheInvalidation.UseRedis(RedisConnectionInfo connectionInfo)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor">
+            <summary>Shim type of RedisMemoryCacheInvalidation.RedisChangeMonitor</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.#ctor(RedisMemoryCacheInvalidation.RedisChangeMonitor)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.Bind(System.IObserver{System.String})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.ConstructorIObservableOfStringString">
+            <summary>Sets the shim of RedisChangeMonitor.RedisChangeMonitor(IObservable`1&lt;String&gt; bus, String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.DisposeBoolean">
+            <summary>Sets the shim of RedisChangeMonitor.Dispose(Boolean disposing)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.OnCompleted">
+            <summary>Sets the shim of RedisChangeMonitor.OnCompleted()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.OnErrorException">
+            <summary>Sets the shim of RedisChangeMonitor.OnError(Exception error)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.OnNextString">
+            <summary>Sets the shim of RedisChangeMonitor.OnNext(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.UniqueIdGet">
+            <summary>Sets the shim of RedisChangeMonitor.get_UniqueId()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.Unsubscribe">
+            <summary>Sets the shim of RedisChangeMonitor.Unsubscribe()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.DisposeBoolean">
+            <summary>Sets the shim of RedisChangeMonitor.Dispose(Boolean disposing)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.OnCompleted">
+            <summary>Sets the shim of RedisChangeMonitor.OnCompleted()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.OnErrorException">
+            <summary>Sets the shim of RedisChangeMonitor.OnError(Exception error)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.OnNextString">
+            <summary>Sets the shim of RedisChangeMonitor.OnNext(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.UniqueIdGet">
+            <summary>Sets the shim of RedisChangeMonitor.get_UniqueId()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisChangeMonitor.AllInstances.Unsubscribe">
+            <summary>Sets the shim of RedisChangeMonitor.Unsubscribe()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException">
+            <summary>Shim type of RedisMemoryCacheInvalidation.RedisConnectionClosedException</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.#ctor(RedisMemoryCacheInvalidation.RedisConnectionClosedException)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.Bind(System.Runtime.Serialization.ISerializable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.Constructor">
+            <summary>Sets the shim of RedisConnectionClosedException.RedisConnectionClosedException()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionClosedException.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo">
+            <summary>Shim type of RedisMemoryCacheInvalidation.RedisConnectionInfo</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.#ctor(RedisMemoryCacheInvalidation.RedisConnectionInfo)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllowAdminGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_AllowAdmin()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllowAdminSetBoolean">
+            <summary>Sets the shim of RedisConnectionInfo.set_AllowAdmin(Boolean value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.Constructor">
+            <summary>Sets the shim of RedisConnectionInfo.RedisConnectionInfo()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.HostGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Host()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.HostSetString">
+            <summary>Sets the shim of RedisConnectionInfo.set_Host(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.IOTimeoutGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_IOTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.IOTimeoutSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_IOTimeout(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.MaxUnsentGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_MaxUnsent()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.MaxUnsentSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_MaxUnsent(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.PasswordGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Password()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.PasswordSetString">
+            <summary>Sets the shim of RedisConnectionInfo.set_Password(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.PortGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Port()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.PortSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_Port(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.SyncTimeoutGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_SyncTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.SyncTimeoutSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_SyncTimeout(Int32 value)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.AllowAdminGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_AllowAdmin()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.AllowAdminSetBoolean">
+            <summary>Sets the shim of RedisConnectionInfo.set_AllowAdmin(Boolean value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.HostGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Host()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.HostSetString">
+            <summary>Sets the shim of RedisConnectionInfo.set_Host(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.IOTimeoutGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_IOTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.IOTimeoutSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_IOTimeout(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.MaxUnsentGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_MaxUnsent()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.MaxUnsentSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_MaxUnsent(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.PasswordGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Password()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.PasswordSetString">
+            <summary>Sets the shim of RedisConnectionInfo.set_Password(String value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.PortGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_Port()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.PortSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_Port(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.SyncTimeoutGet">
+            <summary>Sets the shim of RedisConnectionInfo.get_SyncTimeout()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisConnectionInfo.AllInstances.SyncTimeoutSetInt32">
+            <summary>Sets the shim of RedisConnectionInfo.set_SyncTimeout(Int32 value)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus">
+            <summary>Shim type of RedisMemoryCacheInvalidation.RedisInvalidationMessageBus</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.#ctor(RedisMemoryCacheInvalidation.RedisInvalidationMessageBus)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Bind(RedisMemoryCacheInvalidation.IInvalidationMessageBus)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Bind(System.IDisposable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Bind(System.IObservable{System.String})">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AttemptReconnectException">
+            <summary>Sets the shim of RedisInvalidationMessageBus.AttemptReconnect(Exception exception)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.ConnectToRedis">
+            <summary>Sets the shim of RedisInvalidationMessageBus.ConnectToRedis()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.ConnectWithRetry">
+            <summary>Sets the shim of RedisInvalidationMessageBus.ConnectWithRetry()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.ConstructorRedisConnectionInfo">
+            <summary>Sets the shim of RedisInvalidationMessageBus.RedisInvalidationMessageBus(RedisConnectionInfo configuration)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Dispose">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Dispose()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.InvalidateString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Invalidate(String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.IsConnectedGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_IsConnected()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.MaxRetriesGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_MaxRetries()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.MaxRetriesSetInt32">
+            <summary>Sets the shim of RedisInvalidationMessageBus.set_MaxRetries(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.NotifyString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Notify(String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.OnConnectionClosedObjectEventArgs">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnConnectionClosed(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.OnConnectionErrorObjectErrorEventArgs">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnConnectionError(Object sender, ErrorEventArgs e)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.OnMessageStringByteArray">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnMessage(String pattern, Byte[] data)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.ReconnectDelayGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_ReconnectDelay()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.ReconnectDelaySetTimeSpan">
+            <summary>Sets the shim of RedisInvalidationMessageBus.set_ReconnectDelay(TimeSpan value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.Shutdown">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Shutdown()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.SubscribeIObserverOfString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Subscribe(IObserver`1&lt;String&gt; observer)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus._ConnectWithRetryb__4Task">
+            <summary>Sets the shim of RedisInvalidationMessageBus.&lt;ConnectWithRetry&gt;b__4(Task task)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus._ConnectWithRetryb__5">
+            <summary>Sets the shim of RedisInvalidationMessageBus.&lt;ConnectWithRetry&gt;b__5()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.AttemptReconnectException">
+            <summary>Sets the shim of RedisInvalidationMessageBus.AttemptReconnect(Exception exception)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.ConnectToRedis">
+            <summary>Sets the shim of RedisInvalidationMessageBus.ConnectToRedis()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.ConnectWithRetry">
+            <summary>Sets the shim of RedisInvalidationMessageBus.ConnectWithRetry()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.Dispose">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Dispose()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.InvalidateString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Invalidate(String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.IsConnectedGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_IsConnected()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.MaxRetriesGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_MaxRetries()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.MaxRetriesSetInt32">
+            <summary>Sets the shim of RedisInvalidationMessageBus.set_MaxRetries(Int32 value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.NotifyString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Notify(String key)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.OnConnectionClosedObjectEventArgs">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnConnectionClosed(Object sender, EventArgs e)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.OnConnectionErrorObjectErrorEventArgs">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnConnectionError(Object sender, ErrorEventArgs e)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.OnMessageStringByteArray">
+            <summary>Sets the shim of RedisInvalidationMessageBus.OnMessage(String pattern, Byte[] data)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.ReconnectDelayGet">
+            <summary>Sets the shim of RedisInvalidationMessageBus.get_ReconnectDelay()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.ReconnectDelaySetTimeSpan">
+            <summary>Sets the shim of RedisInvalidationMessageBus.set_ReconnectDelay(TimeSpan value)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.Shutdown">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Shutdown()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances.SubscribeIObserverOfString">
+            <summary>Sets the shim of RedisInvalidationMessageBus.Subscribe(IObserver`1&lt;String&gt; observer)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances._ConnectWithRetryb__4Task">
+            <summary>Sets the shim of RedisInvalidationMessageBus.&lt;ConnectWithRetry&gt;b__4(Task task)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimRedisInvalidationMessageBus.AllInstances._ConnectWithRetryb__5">
+            <summary>Sets the shim of RedisInvalidationMessageBus.&lt;ConnectWithRetry&gt;b__5()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper">
+            <summary>Shim type of RedisMemoryCacheInvalidation.TaskHelper</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.FromResultOf1M0``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Func{``0,System.Threading.Tasks.Task{``0}})">
+            <summary>Sets the shim of TaskHelper.FromResult(!!0 value)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.SetUnwrappedExceptionOf1TaskCompletionSourceOfM0Exception``1(Microsoft.QualityTools.Testing.Fakes.FakesDelegates.Action{System.Threading.Tasks.TaskCompletionSource{``0},System.Exception})">
+            <summary>Sets the shim of TaskHelper.SetUnwrappedException(TaskCompletionSource`1&lt;!!0&gt; tcs, Exception e)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.DelayTimeSpan">
+            <summary>Sets the shim of TaskHelper.Delay(TimeSpan timeOut)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.FastUnwrapTaskOfTask">
+            <summary>Sets the shim of TaskHelper.FastUnwrap(Task`1&lt;Task&gt; task)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.FromMethodAction">
+            <summary>Sets the shim of TaskHelper.FromMethod(Action func)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.FromMethodFuncOfTask">
+            <summary>Sets the shim of TaskHelper.FromMethod(Func`1&lt;Task&gt; func)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.RunTaskTaskAction">
+            <summary>Sets the shim of TaskHelper.RunTask(Task task, Action successor)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.StaticConstructor">
+            <summary>Sets the shim of TaskHelper.TaskHelper()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.ThenTaskAction">
+            <summary>Sets the shim of TaskHelper.Then(Task task, Action successor)</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.ShimTaskHelper.ThenTaskFuncOfTask">
+            <summary>Sets the shim of TaskHelper.Then(Task task, Func`1&lt;Task&gt; successor)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus">
+            <summary>Stub type of RedisMemoryCacheInvalidation.IInvalidationMessageBus</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus.#ctor">
+            <summary>Initializes a new instance of type StubIInvalidationMessageBus</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus.InvalidateString">
+            <summary>Sets the stub of IInvalidationMessageBus.Invalidate(String key)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus.NotifyString">
+            <summary>Sets the stub of IInvalidationMessageBus.Notify(String key)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus.rmci::RedisMemoryCacheInvalidation#IInvalidationMessageBus#Invalidate(System.String)">
+            <summary>Sets the stub of IInvalidationMessageBus.Invalidate(String key)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubIInvalidationMessageBus.rmci::RedisMemoryCacheInvalidation#IInvalidationMessageBus#Notify(System.String)">
+            <summary>Sets the stub of IInvalidationMessageBus.Notify(String key)</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor">
+            <summary>Stub type of RedisMemoryCacheInvalidation.RedisChangeMonitor</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.#ctor(System.IObservable{System.String},System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.Dispose(System.Boolean)">
+            <summary>Sets the stub of RedisChangeMonitor.Dispose(Boolean disposing)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.DisposeBoolean">
+            <summary>Sets the stub of RedisChangeMonitor.Dispose(Boolean disposing)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.InitializeStub">
+            <summary>Initializes a new instance of type StubRedisChangeMonitor</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.UniqueIdGet">
+            <summary>Sets the stub of RedisChangeMonitor.get_UniqueId()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisChangeMonitor.UniqueId">
+            <summary>Sets the stub of RedisChangeMonitor.get_UniqueId()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException">
+            <summary>Stub type of RedisMemoryCacheInvalidation.RedisConnectionClosedException</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.AttachBackingFieldToHelpLink">
+            <summary>Attaches delegates to emulate StubRedisConnectionClosedException.HelpLink as a property with a backing field.</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.AttachBackingFieldToSource">
+            <summary>Attaches delegates to emulate StubRedisConnectionClosedException.Source as a property with a backing field.</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.DataGet">
+            <summary>Sets the stub of Exception.get_Data()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.GetBaseException">
+            <summary>Sets the stub of Exception.GetBaseException()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.GetBaseException01">
+            <summary>Sets the stub of Exception.GetBaseException()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>Sets the stub of Exception.GetObjectData(SerializationInfo info, StreamingContext context)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.GetObjectDataSerializationInfoStreamingContext">
+            <summary>Sets the stub of Exception.GetObjectData(SerializationInfo info, StreamingContext context)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.HelpLinkGet">
+            <summary>Sets the stub of Exception.get_HelpLink()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.HelpLinkSetString">
+            <summary>Sets the stub of Exception.set_HelpLink(String value)</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.InitializeStub">
+            <summary>Initializes a new instance of type StubRedisConnectionClosedException</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.MessageGet">
+            <summary>Sets the stub of Exception.get_Message()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.SourceGet">
+            <summary>Sets the stub of Exception.get_Source()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.SourceSetString">
+            <summary>Sets the stub of Exception.set_Source(String value)</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.StackTraceGet">
+            <summary>Sets the stub of Exception.get_StackTrace()</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.ToString">
+            <summary>Sets the stub of Exception.ToString()</summary>
+        </member>
+        <member name="F:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.ToString01">
+            <summary>Sets the stub of Exception.ToString()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.Data">
+            <summary>Sets the stub of Exception.get_Data()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.HelpLink">
+            <summary>Sets the stub of Exception.get_HelpLink()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.Message">
+            <summary>Sets the stub of Exception.get_Message()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.Source">
+            <summary>Sets the stub of Exception.get_Source()</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionClosedException.StackTrace">
+            <summary>Sets the stub of Exception.get_StackTrace()</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo">
+            <summary>Stub type of RedisMemoryCacheInvalidation.RedisConnectionInfo</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo.InitializeStub">
+            <summary>Initializes a new instance of type StubRedisConnectionInfo</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisConnectionInfo.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus">
+            <summary>Stub type of RedisMemoryCacheInvalidation.RedisInvalidationMessageBus</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus.#ctor(RedisMemoryCacheInvalidation.RedisConnectionInfo)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus.InitializeStub">
+            <summary>Initializes a new instance of type StubRedisInvalidationMessageBus</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:RedisMemoryCacheInvalidation.Fakes.StubRedisInvalidationMessageBus.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+    </members>
+</doc>

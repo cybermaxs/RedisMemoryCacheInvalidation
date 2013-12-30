@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation", "src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj", "{13467724-727B-44CA-BE9D-19BFC4599B34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation.Tests", "tests\RedisMemoryCacheInvalidation.Tests\RedisMemoryCacheInvalidation.Tests.csproj", "{40A11C38-D401-47D2-87A7-35F4019D496B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2570F5F6-E99B-4968-A0CC-5008554444B9}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34FE30CE-858A-4880-8A6E-BD0451757602}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultMvcApplication", "samples\DefaultMvcApplication\DefaultMvcApplication.csproj", "{595610EC-0B98-4DBE-92A0-CFF622E14269}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13467724-727B-44CA-BE9D-19BFC4599B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13467724-727B-44CA-BE9D-19BFC4599B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13467724-727B-44CA-BE9D-19BFC4599B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13467724-727B-44CA-BE9D-19BFC4599B34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40A11C38-D401-47D2-87A7-35F4019D496B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40A11C38-D401-47D2-87A7-35F4019D496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40A11C38-D401-47D2-87A7-35F4019D496B} = {34FE30CE-858A-4880-8A6E-BD0451757602}
+		{595610EC-0B98-4DBE-92A0-CFF622E14269} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
+	EndGlobalSection
+EndGlobal
