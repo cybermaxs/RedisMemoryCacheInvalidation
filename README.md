@@ -59,4 +59,4 @@ MemoryCache.Default.Add(cacheItem, policy);
 ```
 How it works ?
 ------------------
-Read the introduction post here.
+Read the introduction post here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
