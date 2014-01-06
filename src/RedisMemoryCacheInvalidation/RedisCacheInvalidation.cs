@@ -1,6 +1,6 @@
-﻿using System;
+﻿using RedisMemoryCacheInvalidation.Configuration;
+using System;
 using System.Runtime.Caching;
-using RedisMemoryCacheInvalidation.Configuration;
 
 namespace RedisMemoryCacheInvalidation
 {
