@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace RedisMemoryCacheInvalidation
     /// <summary>
     /// Main class to manage redis subscriber connection.
     /// </summary>
-    public class RedisInvalidationMessageBus : IDisposable, IInvalidationMessageBus, ITopicObservable<string>
+    public class RedisNotificationBus : IDisposable, IInvalidationMessageBus, ITopicObservable<string>
     {
         public const string INVALIDATION_KEY = "invalidate";
         private readonly Func<RedisConnection> connectionFactory;
@@ -24,24 +25,27 @@ namespace RedisMemoryCacheInvalidation
         private int retryCount;
 
         public TimeSpan ReconnectDelay { get; set; }
+        public RedisCacheInvalidationPolicy InvalidationPolicy { get; set; }
         public int MaxRetries { get; set; }
-        public bool IsConnected { get { return this.state == State.Connected; } }
+        public bool IsConnected { get { return this.connection != null && this.state == State.Connected; } }
 
         /// <summary>
         /// base constructor
         /// </summary>
         /// <param name="configuration"></param>
-        public RedisInvalidationMessageBus(RedisConnectionInfo configuration)
+        public RedisNotificationBus(RedisConnectionInfo configuration, RedisCacheInvalidationPolicy policy)
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
             }
 
-            connectionFactory = () => new RedisConnection(configuration.Host, configuration.Port, configuration.IOTimeout, configuration.Password, configuration.MaxUnsent, configuration.AllowAdmin, configuration.SyncTimeout);
+            this.connectionFactory = () => new RedisConnection(configuration.Host, configuration.Port, configuration.IOTimeout, configuration.Password, configuration.MaxUnsent, configuration.AllowAdmin, configuration.SyncTimeout);
 
-            ReconnectDelay = TimeSpan.FromSeconds(1);
-            MaxRetries = 5;
+            this.ReconnectDelay = TimeSpan.FromSeconds(1);
+            this.InvalidationPolicy = policy;
+            this.MaxRetries = 5;
+
             ConnectWithRetry();
         }
 
@@ -127,7 +131,7 @@ namespace RedisMemoryCacheInvalidation
 
         private void ConnectWithRetry()
         {
-            Task connectTask = ConnectToRedis();
+            Task connectTask = Connect();
 
             connectTask.ContinueWith(task =>
             {
@@ -169,7 +173,7 @@ namespace RedisMemoryCacheInvalidation
         }
 
         #region ITopicObservable
-        public Task<long> Invalidate(string key)
+        public Task<long> Notify(string key)
         {
             try
             {
@@ -188,17 +192,22 @@ namespace RedisMemoryCacheInvalidation
 
         private ConcurrentDictionary<string, List<IObserver<string>>> Topics = new ConcurrentDictionary<string, List<IObserver<string>>>();
 
+        private bool RemoveFromDefaultMemoryCache(string key)
+        {
+            var cache = MemoryCache.Default;
+            return cache.Remove(key) != null;
+        }
         public IDisposable Subscribe(string topic, IObserver<string> observer)
         {
             var subObs = Topics.GetOrAdd(topic, new List<IObserver<string>>());
 
-            if(!subObs.Contains(observer))
+            if (!subObs.Contains(observer))
                 subObs.Add(observer);
 
             return new Unsubscriber(subObs, observer);
         }
 
-        public void Notify(string key)
+        public void Invalidate(string key)
         {
             var observers = Topics.GetOrAdd(key, new List<IObserver<string>>());
 
@@ -215,10 +224,22 @@ namespace RedisMemoryCacheInvalidation
             // The key is the stream id (channel)
             var key = Encoding.Default.GetString(data);
 
-            Notify(key);
+            switch (this.InvalidationPolicy)
+            {
+                case RedisCacheInvalidationPolicy.ChangeMonitorOnly:
+                    Invalidate(key);
+                    break;
+                case RedisCacheInvalidationPolicy.DefaultMemoryCacheRemoval:
+                    RemoveFromDefaultMemoryCache(key);
+                    break;
+                case RedisCacheInvalidationPolicy.Mixed:
+                    RemoveFromDefaultMemoryCache(key);
+                    Invalidate(key);
+                    break;
+            }
         }
 
-        private Task ConnectToRedis()
+        private Task Connect()
         {
             if (this.connection != null)
             {

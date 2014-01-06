@@ -20,7 +20,7 @@ namespace DefaultMvcApplication.Controllers
             if (!cache.Contains(cacheItem.Key))
             {
                 var policy = new CacheItemPolicy();
-                policy.ChangeMonitors.Add(CacheInvalidation.CreateChangeMonitor(parentkey));
+                policy.ChangeMonitors.Add(RedisCacheInvalidation.CreateChangeMonitor(parentkey));
                 policy.AbsoluteExpiration = DateTime.Now.AddYears(1); // just to create not expirable item
                 MemoryCache.Default.Add(cacheItem, policy);
             }
@@ -35,7 +35,7 @@ namespace DefaultMvcApplication.Controllers
 
         public ActionResult Invalidate()
         {
-            CacheInvalidation.RedisBus.Invalidate(parentkey);
+            RedisCacheInvalidation.RedisBus.Value.Invalidate(parentkey);
 
             return RedirectToAction("Index");
         }

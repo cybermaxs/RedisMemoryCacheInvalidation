@@ -15,7 +15,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Helper
             return new Unsubscriber(observers, observer);
         }
 
-        public void Notify(string key)
+        public void Invalidate(string key)
         {       
             foreach (IObserver<string> observer in observers.ToList())
             {
@@ -23,7 +23,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Helper
             }
         }
 
-        public System.Threading.Tasks.Task<long> Invalidate(string key)
+        public System.Threading.Tasks.Task<long> Notify(string key)
         {
             throw new NotImplementedException();
         }

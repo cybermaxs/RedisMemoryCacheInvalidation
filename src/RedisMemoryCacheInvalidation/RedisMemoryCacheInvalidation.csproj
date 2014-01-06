@@ -43,16 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RedisCacheInvalidationPolicy.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\RedisConfigurationSection.cs" />
     <Compile Include="Interfaces\IInvalidationMessageBus.cs" />
     <Compile Include="Interfaces\ITopicObservable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RedisInvalidationMessageBus.cs" />
+    <Compile Include="RedisNotificationBus.cs" />
     <Compile Include="RedisChangeMonitor.cs" />
     <Compile Include="RedisConnectionClosedException.cs" />
     <Compile Include="RedisConnectionInfo.cs" />
-    <Compile Include="CacheInvalidation.cs" />
+    <Compile Include="RedisCacheInvalidation.cs" />
     <Compile Include="Helper\TaskHelper.cs" />
     <Compile Include="Unsubscriber.cs" />
   </ItemGroup>

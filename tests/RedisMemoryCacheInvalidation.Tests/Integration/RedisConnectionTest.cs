@@ -10,8 +10,8 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
         [TestMethod]
         public void RedisBus_Ctor_WhenNotStarted_ShouldNotBeConnected()
         {
-            RedisConnectionInfo info = new RedisConnectionInfo() { Host = "pingpong" };
-            RedisInvalidationMessageBus bus = new RedisInvalidationMessageBus(info);
+            RedisConnectionInfo info = new RedisConnectionInfo(host: "pingpong");
+            RedisNotificationBus bus = new RedisNotificationBus(info, RedisCacheInvalidationPolicy.ChangeMonitorOnly);
 
             Thread.Sleep(1000);
             Assert.IsFalse(bus.IsConnected);
@@ -23,7 +23,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             RedisServer.Start();
 
             RedisConnectionInfo info = new RedisConnectionInfo();
-            RedisInvalidationMessageBus bus = new RedisInvalidationMessageBus(info);
+            RedisNotificationBus bus = new RedisNotificationBus(info, RedisCacheInvalidationPolicy.ChangeMonitorOnly);
 
             Thread.Sleep(2000);
             Assert.IsTrue(bus.IsConnected);
@@ -37,7 +37,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             RedisServer.Start();
 
             RedisConnectionInfo info = new RedisConnectionInfo();
-            RedisInvalidationMessageBus bus = new RedisInvalidationMessageBus(info);
+            RedisNotificationBus bus = new RedisNotificationBus(info, RedisCacheInvalidationPolicy.ChangeMonitorOnly);
 
             Thread.Sleep(2000);
             Assert.IsTrue(bus.IsConnected);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Caching;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace RedisMemoryCacheInvalidation.Tests
@@ -9,45 +10,59 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestInitialize]
         public void TestInit()
         {
-            CacheInvalidation.RedisBus = null;
+            RedisCacheInvalidation.RedisBus = null;
         }
 
         [TestCleanup]
         public void TestCleanup()
         {
-            CacheInvalidation.RedisBus = null;
+            RedisCacheInvalidation.RedisBus = null;
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void CacheInvalidation_WhenNotConfigured_ShouldThrowInvalidOperationException()
+        public void CreateChangeMonitor_WhenNotConfigured_ShouldThrowInvalidOperationException()
         {
-            CacheInvalidation.CreateChangeMonitor("testkey");
+            RedisCacheInvalidation.CreateChangeMonitor("testkey");
+        }
+
+        [TestMethod]
+        public void CreateChangeMonitor_WhenConfigured_ShouldSucceed()
+        {
+            CacheItem item = new CacheItem("mykey");
+            RedisCacheInvalidation.Use(new RedisConnectionInfo());
+            var monitor = RedisCacheInvalidation.CreateChangeMonitor(item);
+
+            Assert.IsNotNull(monitor);
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void CacheInvalidation_WhenConfiguredTwice_ShouldThrowInvalidOperationException()
         {
-            CacheInvalidation.UseRedis(new RedisConnectionInfo());
-            CacheInvalidation.UseRedis(new RedisConnectionInfo());
+            RedisCacheInvalidation.Use(new RedisConnectionInfo());
+            RedisCacheInvalidation.Use(new RedisConnectionInfo());
         }
+
+
+
 
         [TestMethod]
         public void CacheInvalidation_ProgConfig_ShouldSucceed()
         {
-            CacheInvalidation.UseRedis(new RedisConnectionInfo());
-            
-            Assert.IsNotNull(CacheInvalidation.RedisBus);
+            RedisCacheInvalidation.Use(new RedisConnectionInfo());
+
+            Assert.IsNotNull(RedisCacheInvalidation.RedisBus);
         }
 
 
         [TestMethod]
         public void CacheInvalidation_Config_ShouldSucceed()
         {
-            CacheInvalidation.UseRedis();
+            RedisCacheInvalidation.Use();
 
-            Assert.IsNotNull(CacheInvalidation.RedisBus);
+            Assert.IsNotNull(RedisCacheInvalidation.RedisBus);
         }
     }
 }

@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace RedisMemoryCacheInvalidation
 {
+    /// <summary>
+    /// Task Helper for .net 4.0
+    /// Really inspired from SignalR.
+    /// </summary>
     [ExcludeFromCodeCoverage]
     public static class TaskHelper
     {

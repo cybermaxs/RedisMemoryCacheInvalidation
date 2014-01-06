@@ -12,7 +12,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void Bus_Topic_Subscription()
         {
-            var bus = new RedisInvalidationMessageBus(new RedisConnectionInfo());
+            var bus = new RedisNotificationBus(new RedisConnectionInfo(), RedisCacheInvalidationPolicy.ChangeMonitorOnly);
 
             var observer1 = new FakeObserver();
             bus.Subscribe(UnitTestTopic, observer1);
