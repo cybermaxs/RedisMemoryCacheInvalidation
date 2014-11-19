@@ -33,6 +33,10 @@ How it works ?
 ------------------
 Read the introduction post for the initial version (beginning of 2014) here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
 
+License
+------------------
+Licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT)
+
 Want to contribute ?
 ------------------
 - Beginner => Download, Star, Comment/Tweet, Kudo, ...
