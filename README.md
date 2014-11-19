@@ -29,7 +29,6 @@ Once an invalidation message is intercepted by the code, you can invalidate one 
 - use the auto cache removal strategy, configured via `InvalidationManager.Configure`
 
 
-```
 How it works ?
 ------------------
 Read the introduction post for the initial version (beginning of 2014) here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
