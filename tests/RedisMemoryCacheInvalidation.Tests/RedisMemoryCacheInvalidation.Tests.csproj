@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RedisMemoryCacheInvalidation.Tests</RootNamespace>
     <AssemblyName>RedisMemoryCacheInvalidation.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,18 +37,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BookSleeve">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\BookSleeve.1.3.41\lib\BookSleeve.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="RedisMemoryCacheInvalidation.Fakes">
-      <HintPath>FakesAssemblies\RedisMemoryCacheInvalidation.Fakes.dll</HintPath>
+    <Reference Include="StackExchange.Redis">
+      <HintPath>..\..\packages\StackExchange.Redis.1.0.371\lib\net45\StackExchange.Redis.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <Choose>
@@ -63,17 +63,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Helper\FakeObservable.cs" />
-    <Compile Include="Helper\FakeObserver.cs" />
     <Compile Include="Helper\RedisServer.cs" />
-    <Compile Include="Integration\DefaultMemoryCacheTest.cs" />
+    <Compile Include="Integration\IntegrationTest.cs" />
+    <Compile Include="Integration\StackExchangeRedisConnectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Integration\RedisConnectionTest.cs" />
     <Compile Include="RedisChangeMonitorTest.cs" />
-    <Compile Include="CacheInvalidationTest.cs" />
-    <Compile Include="TaskHelperTest.cs" />
-    <Compile Include="RedisConfigurationTest.cs" />
-    <Compile Include="RedisInvalidationMessageBusTest.cs" />
+    <Compile Include="InvalidationManagerTest.cs" />
+    <Compile Include="NotificationManagerTest.cs" />
+    <Compile Include="RedisNotificationBusTest.cs" />
+    <Compile Include="UnsubscriberTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj">
@@ -83,14 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config\Invalid.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\Valid.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

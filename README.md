@@ -1,3 +1,5 @@
+Warning : Work in progress... Readme is not up to date
+
 RedisMemoryCacheInvalidation
 ============================
 

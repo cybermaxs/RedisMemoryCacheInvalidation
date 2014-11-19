@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RedisMemoryCacheInvalidation.Tests.Helper;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using RedisMemoryCacheInvalidation.Core;
+using RedisMemoryCacheInvalidation.Core.Interfaces;
+using RedisMemoryCacheInvalidation.Monitor;
+using System;
 
 namespace RedisMemoryCacheInvalidation.Tests
 {
@@ -10,6 +12,21 @@ namespace RedisMemoryCacheInvalidation.Tests
     {
         public const string notifKey = "unittestkey";
 
+        Mock<INotificationManager<string>> MockOfBus;
+        Mock<IDisposable> MockOfDispose;
+
+        INotificationManager<string> Bus { get { return MockOfBus.Object; } }
+        
+
+        [TestInitialize]
+        public void TestInit()
+        {
+            this.MockOfDispose = new Mock<IDisposable>();
+            this.MockOfBus = new Mock<INotificationManager<string>>();
+            this.MockOfBus.Setup(t => t.Subscribe(It.IsAny<string>(), It.IsAny<INotificationObserver<string>>())).Returns(this.MockOfDispose.Object);
+        }
+
+        #region Tests
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void RedisChangeMonitor_WhenCtorWithoutBus_ShouldThrowArgumentNullException()
@@ -21,17 +38,17 @@ namespace RedisMemoryCacheInvalidation.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void RedisChangeMonitor_WhenCtorWithoutKey_ShouldThrowArgumentNullException()
         {
-            RedisChangeMonitor monitor = new RedisChangeMonitor(new FakeObservable(), null);
+            RedisChangeMonitor monitor = new RedisChangeMonitor(this.Bus, null);
         }
 
         [TestMethod]
         public void RedisChangeMonitor_WhenCtor_ShouldHaveUniqueId()
         {
-            RedisChangeMonitor monitor1 = new RedisChangeMonitor(new FakeObservable(), notifKey);
+            RedisChangeMonitor monitor1 = new RedisChangeMonitor(this.Bus, notifKey);
             Assert.IsNotNull(monitor1);
             Assert.IsTrue(monitor1.UniqueId.Length > 0);
 
-            RedisChangeMonitor monitor2 = new RedisChangeMonitor(new FakeObservable(), notifKey);
+            RedisChangeMonitor monitor2 = new RedisChangeMonitor(this.Bus, notifKey);
             Assert.IsNotNull(monitor2);
             Assert.IsTrue(monitor2.UniqueId.Length > 0);
 
@@ -41,28 +58,31 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisChangeMonitor_WhenCtor_ShouldBeRegistered()
         {
-            FakeObservable bus = new FakeObservable();
-            RedisChangeMonitor monitor = new RedisChangeMonitor(bus, notifKey);
-
-            Assert.IsNotNull(bus.observers);
-            Assert.AreEqual(1, bus.observers.Count);
-            Assert.AreSame(monitor, bus.observers[0]);
+            RedisChangeMonitor monitor = new RedisChangeMonitor(this.Bus, notifKey);
+            this.MockOfBus.Verify(e => e.Subscribe(notifKey, monitor), Times.Once);
         }
 
         [TestMethod]
-        public void RedisChangeMonitor_WhenNotified_ShouldChangedAndDisposedAndUnregistered()
+        public void RedisChangeMonitor_WhenExceptioninCtor_ShouldBeDisposed()
         {
-            FakeObservable obs = new FakeObservable();
+            this.MockOfBus.Setup(e => e.Subscribe(It.IsAny<string>(), It.IsAny<INotificationObserver<string>>())).Throws<InvalidOperationException>();
+            RedisChangeMonitor monitor = new RedisChangeMonitor(this.Bus, notifKey);
 
-            RedisChangeMonitor monitor = new RedisChangeMonitor(obs, notifKey);
-            obs.Notify(notifKey);
-
-            Assert.IsNotNull(monitor);
             Assert.IsTrue(monitor.IsDisposed);
-            Assert.IsTrue(monitor.HasChanged);
-
-            Assert.IsNotNull(obs.observers);
-            Assert.AreEqual(0, obs.observers.Count);
         }
+
+        [TestMethod]
+        public void RedisChangeMonitor_WhenChanged_ShouldBeDisposed()
+        {
+            RedisChangeMonitor monitor = new RedisChangeMonitor(this.Bus, notifKey);
+            monitor.Notify(notifKey);
+
+            Assert.IsTrue(monitor.IsDisposed);
+
+            this.MockOfBus.Verify(e => e.Subscribe(notifKey, monitor), Times.Once);
+            this.MockOfDispose.Verify(e => e.Dispose(), Times.Once);
+        }
+        #endregion
+
     }
 }

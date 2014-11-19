@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation", "src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj", "{13467724-727B-44CA-BE9D-19BFC4599B34}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation.Tests", "tests\RedisMemoryCacheInvalidation.Tests\RedisMemoryCacheInvalidation.Tests.csproj", "{40A11C38-D401-47D2-87A7-35F4019D496B}"
@@ -16,7 +18,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34FE30CE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultMvcApplication", "samples\DefaultMvcApplication\DefaultMvcApplication.csproj", "{595610EC-0B98-4DBE-92A0-CFF622E14269}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FB54E47A-C7AA-4DBB-B575-A45678B4E278}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{3114735D-1E82-4ED9-BBA7-C9FB4B5FC9F0}"
+	ProjectSection(SolutionItems) = preProject
+		Build.proj = Build.proj
+		.build\MSBuild.Community.Tasks.dll = .build\MSBuild.Community.Tasks.dll
+		.build\MSBuild.Community.Tasks.targets = .build\MSBuild.Community.Tasks.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation_Net40", "src\RedisMemoryCacheInvalidation_Net40\RedisMemoryCacheInvalidation_Net40.csproj", "{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApplication", "samples\SampleWebApplication\SampleWebApplication.csproj", "{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInvalidationEmitter", "samples\SampleInvalidationEmitter\SampleInvalidationEmitter.csproj", "{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,16 +47,27 @@ Global
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{595610EC-0B98-4DBE-92A0-CFF622E14269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{13467724-727B-44CA-BE9D-19BFC4599B34} = {FB54E47A-C7AA-4DBB-B575-A45678B4E278}
 		{40A11C38-D401-47D2-87A7-35F4019D496B} = {34FE30CE-858A-4880-8A6E-BD0451757602}
-		{595610EC-0B98-4DBE-92A0-CFF622E14269} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
+		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB} = {FB54E47A-C7AA-4DBB-B575-A45678B4E278}
+		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
+		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
 	EndGlobalSection
 EndGlobal

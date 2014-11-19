@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using BookSleeve;
+using StackExchange.Redis;
 
 namespace RedisMemoryCacheInvalidation.Tests.Helper
 {
+    /// <summary>
+    /// Helper class to manage a local redis server for integration tests.
+    /// </summary>
     public class RedisServer
     {
         public static bool IsRunning
@@ -17,7 +20,16 @@ namespace RedisMemoryCacheInvalidation.Tests.Helper
         public static bool Start()
         {
             if (!IsRunning)
-                return Process.Start(@"..\..\..\..\tools\redis-server.exe") != null;
+            {
+                var p = Process.Start(@"..\..\..\..\packages\Redis-64.2.8.17\redis-server.exe");
+
+                using (var cnx = ConnectionMultiplexer.Connect("localhost:6379,allowAdmin=true"))
+                {
+                    cnx.GetServer("localhost:6379").FlushAllDatabases();
+                    cnx.GetServer("localhost:6379").ConfigSet("notify-keyspace-events", "EA");
+                }
+                return p!= null;//bouh
+            }
             return false;
         }
 
@@ -25,10 +37,9 @@ namespace RedisMemoryCacheInvalidation.Tests.Helper
         {
             if (IsRunning)
             {
-                using (var cnx = new RedisConnection("localhost", allowAdmin: true))
+                using (var cnx = ConnectionMultiplexer.Connect("localhost:6379,allowAdmin=true"))
                 {
-                    cnx.Wait(cnx.Open());
-                    cnx.Server.FlushAll().Wait();
+                    cnx.GetServer("localhost:6379").FlushAllDatabases();
                 }
             }
             return false;
