@@ -35,8 +35,8 @@ Read the introduction post for the initial version (beginning of 2014) here : ht
 
 Want to contribute ?
 ------------------
-Beginner => Download, Star, Comment/Tweet, Kudo, ...
-Amateur => Ask for help, send feature request, send bugs
-Pro => Pull request, promote
+- Beginner => Download, Star, Comment/Tweet, Kudo, ...
+- Amateur => Ask for help, send feature request, send bugs
+- Pro => Pull request, promote
 
 Thank you
