@@ -1,64 +1,35 @@
-Warning : Work in progress... Readme is not up to date
-
 RedisMemoryCacheInvalidation
 ============================
 
-Custom ChangeMonitor to allow System.Runtime.MemoryCache invalidation using Redis PubSub.
+System.Runtime.MemoryCache invalidation using Redis PubSub feature.
 
-Demo Application
--------------------
 
-A sample web site is provided. Do not hesitate to open and test it.
-
-How to use it ?
-------------------
-
-Redis connection settings can be provider by code or by configuration.
-
-- Code
-
-```csharp
-  //somewhere in your global.asax (for an asp.net application)
-  // be sure a redis instance is running on localhost
-  // check /tools/redis-server.exe
-  CacheInvalidation.UseRedis(new RedisConnectionInfo() { Host = "localhost" });
+## Installing via NuGet
+```
+Install-Package RedisMemoryCacheInvalidation
 ```
 
-- Configuration
 
-```csharp
-  //somewhere in your global.asax (for an asp.net application)
-  // be sure a redis instance is running on localhost
-  // check /tools/redis-server.exe
-  CacheInvalidation.UseRedis(new RedisConnectionInfo() { Host = "localhost" });
-  
-  //in your configuration file
-<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-	<configSections>
-		<section name="redis" type="RedisMemoryCacheInvalidation.Configuration.RedisConfigurationSection, RedisMemoryCacheInvalidation" />
-	</configSections>
-	<redis host="localhost"></redis>
-</configuration>
-```
+## How to use it ?
 
-Here is the minimal code required to create a changemonitor. 
-Feel free to adapt to your context.
+First, you have to configure the libray, mainly to setup a persistent redis connection and various stuff
 ```csharp
-var cacheItem = new CacheItem("onekey", "onevalue");
-var policy = new CacheItemPolicy();
-policy.ChangeMonitors.Add(CacheInvalidation.CreateChangeMonitor(cacheItem));
-policy.AbsoluteExpiration = DateTime.Now.AddYears(1);
-MemoryCache.Default.Add(cacheItem, policy);
+  // somewhere in your global.asax/startup.cs
+  InvalidationManager.Configure("localhost:6379");
 ```
-your can also create items that are depending on a specific redis message.
-```csharp
-var cacheItem = new CacheItem("onekey", "onevalue");
-var policy = new CacheItemPolicy();
-policy.ChangeMonitors.Add(CacheInvalidation.CreateChangeMonitor("mycustominvalidationmessage"));
-policy.AbsoluteExpiration = DateTime.Now.AddYears(1);
-MemoryCache.Default.Add(cacheItem, policy);
+Redis connection string follow [StackExchange.Redis Configuration model](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md)
+
+Threre are at least 3 ways to send invalidation messages :
+- send an invalidation message via any redis client following the command `PUBLISH invalidate key`
+- use `InvalidationManager.Invalidate` (same as the previous one)
+- use keyspace notification (yes, RedisMemoryCacheInvalidation supports it)
+
+Once an invalidation message is intercepted by the code, you can invalidate one or more items at the same time by using
+- a custom custom change monitor `InvalidationManager.CreateChangeMonitor`
+- use the auto cache removal strategy, configured via `InvalidationManager.Configure`
+
+
 ```
 How it works ?
 ------------------
-Read the introduction post here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
+Read the introduction post for the initial version (beginning of 2014) here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
