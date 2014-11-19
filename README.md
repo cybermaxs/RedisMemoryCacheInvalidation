@@ -39,4 +39,4 @@ Beginner => Download, Star, Comment/Tweet, Kudo, ...
 Amateur => Ask for help, send feature request, send bugs
 Pro => Pull request, promote
 
-Thanks you
+Thank you
