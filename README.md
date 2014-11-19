@@ -12,7 +12,7 @@ Install-Package RedisMemoryCacheInvalidation
 
 ## How to use it ?
 
-First, you have to configure the libray, mainly to setup a persistent redis connection and various stuff
+First, you have to configure the library, mainly to setup a persistent redis connection and various stuff
 ```csharp
   // somewhere in your global.asax/startup.cs
   InvalidationManager.Configure("localhost:6379");
