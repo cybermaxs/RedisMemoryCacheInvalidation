@@ -19,7 +19,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
         {
             RedisServer.Start();
             LocalCache = new MemoryCache(Guid.NewGuid().ToString());
-            InvalidationManager.ConfigureAsync("localhost:6379", InvalidationStrategy.Both, LocalCache, true).Wait();
+            InvalidationManager.ConfigureAsync("localhost:6379", new InvalidationSettings() { InvalidationStrategy = InvalidationStrategyType.All, EnableKeySpaceNotifications = true }).Wait();
         }
 
         [ClassCleanup]

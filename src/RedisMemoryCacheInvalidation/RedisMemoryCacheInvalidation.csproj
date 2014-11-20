@@ -49,8 +49,9 @@
     <Compile Include="Core\Interfaces\IRedisNotificationBus.cs" />
     <Compile Include="Core\NotificationManager.cs" />
     <Compile Include="Core\RedisNotificationBus.cs" />
-    <Compile Include="InvalidationStrategy.cs" />
+    <Compile Include="InvalidationStrategyType.cs" />
     <Compile Include="Core\Interfaces\INotificationManager.cs" />
+    <Compile Include="InvalidationSettings.cs" />
     <Compile Include="Utils\SynchronizedCollection.cs" />
     <Compile Include="Utils\TaskCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -28,16 +28,14 @@ namespace RedisMemoryCacheInvalidation
         /// A new redis connection will be establish based upon parameter redisConfig.
         /// </summary>
         /// <param name="redisConfig">StackExchange configuration settings.</param>
-        /// <param name="policy">Cache Invalidation strategy(</param>
-        /// <param name="cache">Target MemoryCache for automatic removal</param>
-        /// <param name="enableKeySpaceNotifications">Subcribe to all keyspace notifications. Redis server config should be properly configured.</param>
+        /// <param name="settings">InvalidationManager settings.(</param>
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
-        public static Task ConfigureAsync(string redisConfig, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache=null, bool enableKeySpaceNotifications=false)
+        public static Task ConfigureAsync(string redisConfig, InvalidationSettings settings=null)
         {
             if (notificationBus != null)
                 throw new InvalidOperationException("Configure() was already called");
 
-            notificationBus = new RedisNotificationBus(redisConfig, policy, cache, enableKeySpaceNotifications);
+            notificationBus = new RedisNotificationBus(redisConfig, settings);
             return notificationBus.StartAsync();
         }
 
@@ -45,16 +43,14 @@ namespace RedisMemoryCacheInvalidation
         /// Use to Configure Redis MemoryCache Invalidation.
         /// </summary>
         /// <param name="mux">Reusing an existing ConnectionMultiplexer.</param>
-        /// <param name="policy">Cache Invalidation strategy(</param>
-        /// <param name="cache">Target MemoryCache for automatic removal</param>
-        /// <param name="enableKeySpaceNotifications">Subcribe to all keyspace notifications. Redis server config should be properly configured.</param>
+        /// <param name="settings">InvalidationManager settings.(</param>
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
-        public static Task ConfigureAsync(ConnectionMultiplexer mux, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
+        public static Task ConfigureAsync(ConnectionMultiplexer mux, InvalidationSettings settings=null)
         {
             if (notificationBus != null)
                 throw new InvalidOperationException("Configure() was already called");
 
-            notificationBus = new RedisNotificationBus(mux, policy, cache, enableKeySpaceNotifications);
+            notificationBus = new RedisNotificationBus(mux, settings);
             return notificationBus.StartAsync();
         }
         #endregion
@@ -73,8 +69,8 @@ namespace RedisMemoryCacheInvalidation
             if (notificationBus == null)
                 throw new InvalidOperationException("Configure() was not called");
 
-            if (notificationBus.InvalidationStrategy == InvalidationStrategy.AutoCacheRemoval)
-                throw new InvalidOperationException("Could not create a change monitor when policy is DefaultMemoryCacheRemoval");
+            if (notificationBus.InvalidationStrategy == InvalidationStrategyType.AutoCacheRemoval)
+                throw new InvalidOperationException("Could not create a change monitor when InvalidationStrategy is DefaultMemoryCacheRemoval");
 
             return new RedisChangeMonitor(notificationBus.Notifier, invalidationKey);
         }

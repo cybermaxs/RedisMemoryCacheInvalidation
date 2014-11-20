@@ -32,7 +32,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisNotificationBus_WhenInvalidCtorArgs_ShouldNotThrowExceptions()
         {
-            RedisNotificationBus bus = new RedisNotificationBus("fghfgh", InvalidationStrategy.ChangeMonitorOnly);
+            RedisNotificationBus bus = new RedisNotificationBus("fghfgh");
             Assert.IsNotNull(bus.Connection);
             Assert.IsNotNull(bus.Notifier);
             Assert.AreEqual(MemoryCache.Default, bus.LocalCache);
@@ -41,7 +41,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisNotificationBus_WhenStart_ShouldConnectAndSubscribe()
         {
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379");
             bus.Connection = this.MockOfConnection.Object;
 
             var startTask = bus.StartAsync();
@@ -56,7 +56,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisNotificationBus_WhenNotify_ShouldPublishAsync()
         {
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379");
             bus.Connection = this.MockOfConnection.Object;
 
 
@@ -70,7 +70,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisNotificationBus_WhenStop_ShouldDisconnect()
         {
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379");
             bus.Connection = this.MockOfConnection.Object;
 
 
@@ -84,7 +84,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void RedisNotificationBus_WhenDispose_ShouldDisconnect()
         {
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379");
             bus.Connection = this.MockOfConnection.Object;
 
             bus.Dispose();
@@ -97,7 +97,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         public void RedisNotificationBus_WhenInvalidation_ShouldRemoveFromDefaultCache()
         {
             MemoryCache lcache = new MemoryCache(Guid.NewGuid().ToString());
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.AutoCacheRemoval, lcache);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings() { TargetCache = lcache, InvalidationStrategy = InvalidationStrategyType.AutoCacheRemoval });
             bus.Connection = this.MockOfConnection.Object;
             RedisChangeMonitor monitor = new RedisChangeMonitor(bus.Notifier, "mykey");
             lcache.Add("mykey", DateTime.UtcNow, new CacheItemPolicy() { AbsoluteExpiration = DateTime.UtcNow.AddDays(1), ChangeMonitors = { monitor } });
@@ -119,7 +119,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         public void RedisNotificationBus_WhenInvalidation_ShouldDisposeMonitor()
         {
             MemoryCache lcache = new MemoryCache(Guid.NewGuid().ToString());
-            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly, lcache);
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings() { TargetCache = lcache, InvalidationStrategy = InvalidationStrategyType.ChangeMonitor });
             bus.Connection = this.MockOfConnection.Object;
             RedisChangeMonitor monitor = new RedisChangeMonitor(bus.Notifier, "mykey");
             lcache.Add("mykey", DateTime.UtcNow, new CacheItemPolicy() { AbsoluteExpiration = DateTime.UtcNow.AddDays(1), ChangeMonitors = { monitor } });
@@ -135,6 +135,31 @@ namespace RedisMemoryCacheInvalidation.Tests
             //assert
             Assert.IsFalse(lcache.Contains("mykey"));
             Assert.IsTrue(monitor.IsDisposed);
+        }
+
+        [TestMethod]
+        public void RedisNotificationBus_WhenInvalidation_ShouldInvokeCallback()
+        {
+            MemoryCache lcache = new MemoryCache(Guid.NewGuid().ToString());
+            bool called=false;
+            Action<string> cb= s=> {called=true;};
+            RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings() { InvalidationStrategy = InvalidationStrategyType.External, InvalidationCallback = cb });
+            bus.Connection = this.MockOfConnection.Object;
+            RedisChangeMonitor monitor = new RedisChangeMonitor(bus.Notifier, "mykey");
+            lcache.Add("mykey", DateTime.UtcNow, new CacheItemPolicy() { AbsoluteExpiration = DateTime.UtcNow.AddDays(1), ChangeMonitors = { monitor } });
+
+            var startTask = bus.StartAsync();
+
+            Assert.IsNotNull(startTask);
+            Assert.IsTrue(startTask.IsCompleted);
+
+            //act
+            this.NotificationEmitter(RedisNotificationBus.DEFAULT_INVALIDATION_CHANNEL, "mykey");
+
+            //assert
+            Assert.IsTrue(lcache.Contains("mykey"));
+            Assert.IsFalse(monitor.IsDisposed);
+            Assert.IsTrue(called);
         }
         #endregion
     }

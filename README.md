@@ -20,14 +20,14 @@ First, you have to configure the library, mainly to setup a persistent redis con
 Redis connection string follow [StackExchange.Redis Configuration model](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md)
 
 Threre are at least 3 ways to send invalidation messages :
-- send an invalidation message via any redis client following the command `PUBLISH invalidate key`
+- send an invalidation message via any redis client following the command `PUBLISH invalidate onemessagekey`
 - use `InvalidationManager.Invalidate` (same as the previous one)
 - use keyspace notification (yes, RedisMemoryCacheInvalidation supports it)
 
-Once an invalidation message is intercepted by the code, you can invalidate one or more items at the same time by using
-- a custom custom change monitor `InvalidationManager.CreateChangeMonitor`
-- use the auto cache removal strategy, configured via `InvalidationManager.Configure`
-
+Once an invalidation message is intercepted by the library, you can invalidate one or more items at the same time by using `InvalidationSettings.InvalidationStrategy`
+- `InvalidationStrategyType.ChangeMonitor` => a custom custom change monitor `InvalidationManager.CreateChangeMonitor`
+- `InvalidationStrategyType.AutoCacheRemoval` => use the automatic MemoryCache removal configured at `InvalidationSettings.Configure`
+- `InvalidationStrategyType.External` => use the callback configured at `InvalidationSettings.InvalidationCallback`
 
 How it works ?
 ------------------

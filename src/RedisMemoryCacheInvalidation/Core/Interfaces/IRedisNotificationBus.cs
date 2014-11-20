@@ -9,7 +9,7 @@ namespace RedisMemoryCacheInvalidation
     {
         IRedisConnection Connection { get; }
         void Dispose();
-        InvalidationStrategy InvalidationStrategy { get; set; }
+        InvalidationStrategyType InvalidationStrategy { get; set; }
         MemoryCache LocalCache { get; }
         INotificationManager<string> Notifier { get; set; }
         Task<long> NotifyAsync(string key);
