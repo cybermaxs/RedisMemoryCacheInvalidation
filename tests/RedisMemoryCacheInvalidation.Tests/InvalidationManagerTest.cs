@@ -20,7 +20,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [TestMethod]
         public void Configure_WhenInvalid_ShouldThrowException()
         {
-            var configTask = InvalidationManager.Configure("dfsdf");
+            var configTask = InvalidationManager.ConfigureAsync("dfsdf");
             configTask.Wait();
 
             Assert.IsTrue(configTask.IsCompleted);
@@ -31,8 +31,8 @@ namespace RedisMemoryCacheInvalidation.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Configure_WhenTwice_ShouldThrowException()
         {
-            InvalidationManager.Configure("dfsdf");
-            InvalidationManager.Configure("dfsdf");
+            InvalidationManager.ConfigureAsync("dfsdf");
+            InvalidationManager.ConfigureAsync("dfsdf");
         }
         #endregion
 
@@ -56,7 +56,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void Invalidate_WhenNotConfigured_ShouldThrowException()
         {
-            InvalidationManager.Invalidate("rzaaer");
+            InvalidationManager.InvalidateAsync("rzaaer");
         }
 
         [TestMethod]
@@ -79,9 +79,9 @@ namespace RedisMemoryCacheInvalidation.Tests
         {
             InvalidationManager.notificationBus = this.MockOfBus.Object;
 
-            InvalidationManager.Invalidate("mykey");
+            InvalidationManager.InvalidateAsync("mykey");
 
-            this.MockOfBus.Verify(b => b.Notify("mykey"), Times.Once);
+            this.MockOfBus.Verify(b => b.NotifyAsync("mykey"), Times.Once);
         }
     }
 }

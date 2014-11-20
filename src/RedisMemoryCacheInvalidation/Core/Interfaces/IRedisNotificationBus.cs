@@ -12,8 +12,8 @@ namespace RedisMemoryCacheInvalidation
         InvalidationStrategy InvalidationStrategy { get; set; }
         MemoryCache LocalCache { get; }
         INotificationManager<string> Notifier { get; set; }
-        Task<long> Notify(string key);
-        Task Start();
-        Task Stop();
+        Task<long> NotifyAsync(string key);
+        Task StartAsync();
+        Task StopAsync();
     }
 }

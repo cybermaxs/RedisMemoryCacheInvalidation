@@ -1,15 +1,22 @@
 ﻿using RedisMemoryCacheInvalidation.Core;
 using RedisMemoryCacheInvalidation.Monitor;
+using StackExchange.Redis;
 using System;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 
 namespace RedisMemoryCacheInvalidation
 {
+    /// <summary>
+    /// Libray's entry point. 
+    /// </summary>
     public static class InvalidationManager
     {
         internal static IRedisNotificationBus notificationBus = null;
 
+        /// <summary>
+        /// Redis connection state : connected or not.
+        /// </summary>
         public static bool IsConnected
         {
             get {return notificationBus!=null && notificationBus.Connection.IsConnected;}
@@ -17,30 +24,50 @@ namespace RedisMemoryCacheInvalidation
 
         #region Setup
         /// <summary>
-        /// Use to Redis MemoryCache Invalidation.
+        /// Use to Configure Redis MemoryCache Invalidation.
+        /// A new redis connection will be establish based upon parameter redisConfig.
         /// </summary>
         /// <param name="redisConfig">StackExchange configuration settings.</param>
-        /// <param name="policy">Cache Invalidation strategy.</param>
-        /// <returns>Task when connection is open</returns>
-        public static Task Configure(string redisConfig, InvalidationStrategy policy = InvalidationStrategy.ChangeMonitorOnly, MemoryCache cache=null, bool enableKeySpaceNotifications=false)
+        /// <param name="policy">Cache Invalidation strategy(</param>
+        /// <param name="cache">Target MemoryCache for automatic removal</param>
+        /// <param name="enableKeySpaceNotifications">Subcribe to all keyspace notifications. Redis server config should be properly configured.</param>
+        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
+        public static Task ConfigureAsync(string redisConfig, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache=null, bool enableKeySpaceNotifications=false)
         {
             if (notificationBus != null)
                 throw new InvalidOperationException("Configure() was already called");
 
             notificationBus = new RedisNotificationBus(redisConfig, policy, cache, enableKeySpaceNotifications);
-            return notificationBus.Start();
+            return notificationBus.StartAsync();
+        }
+
+        /// <summary>
+        /// Use to Configure Redis MemoryCache Invalidation.
+        /// </summary>
+        /// <param name="mux">Reusing an existing ConnectionMultiplexer.</param>
+        /// <param name="policy">Cache Invalidation strategy(</param>
+        /// <param name="cache">Target MemoryCache for automatic removal</param>
+        /// <param name="enableKeySpaceNotifications">Subcribe to all keyspace notifications. Redis server config should be properly configured.</param>
+        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
+        public static Task ConfigureAsync(ConnectionMultiplexer mux, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
+        {
+            if (notificationBus != null)
+                throw new InvalidOperationException("Configure() was already called");
+
+            notificationBus = new RedisNotificationBus(mux, policy, cache, enableKeySpaceNotifications);
+            return notificationBus.StartAsync();
         }
         #endregion
 
         #region CreateMonitor
         /// <summary>
-        /// 
+        /// Allow to create a custom ChangeMonitor depending on the pubsub event (channel : invalidate, data:invalidationKey)
         /// </summary>
-        /// <param name="invalidationKey">invalidation key send by redis {invalidate:key}</param>
-        /// <returns></returns>
+        /// <param name="invalidationKey">invalidation key send by redis PUBLISH invalidate invalidatekey</param>
+        /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(string invalidationKey)
         {
-            if (invalidationKey == null)
+            if (string.IsNullOrEmpty(invalidationKey))
                 throw new ArgumentNullException("key");
 
             if (notificationBus == null)
@@ -53,10 +80,10 @@ namespace RedisMemoryCacheInvalidation
         }
 
         /// <summary>
-        /// Invalidation as as cache item
+        /// Allow to create a custom ChangeMonitor depending on the pubsub event (channel : invalidate, data:item.Key)
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="invalidationKey">invalidation key send by redis PUBLISH invalidate invalidatekey</param>
+        /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(CacheItem item)
         {
             if (item == null)
@@ -71,15 +98,16 @@ namespace RedisMemoryCacheInvalidation
 
         /// <summary>
         /// Used to send invalidation message for a key.
+        /// Shortcut for PUBLISH invalidate key. 
         /// </summary>
         /// <param name="key"></param>
         /// <returns>Task with the number of subscribers</returns>
-        public static Task<long> Invalidate(string key)
+        public static Task<long> InvalidateAsync(string key)
         {
             if (notificationBus == null)
                 throw new InvalidOperationException("Configure() was not called");
 
-            return notificationBus.Notify(key);
+            return notificationBus.NotifyAsync(key);
         }
     }
 }

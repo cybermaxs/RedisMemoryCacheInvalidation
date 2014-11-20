@@ -7,8 +7,8 @@ namespace RedisMemoryCacheInvalidation.Redis
     public interface IRedisConnection
     {
         bool IsConnected { get; }
-        Task<bool> Connect();
-        Task Disconnect();
+        Task<bool> ConnectAsync();
+        Task DisconnectAsync();
         Task<KeyValuePair<string, string>[]> GetConfigAsync();
         Task SubscribeAsync(string channel, Action<string, string> handler);
         Task UnsubscribeAllAsync();

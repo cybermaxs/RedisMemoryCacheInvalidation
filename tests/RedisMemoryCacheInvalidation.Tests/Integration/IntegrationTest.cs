@@ -19,7 +19,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
         {
             RedisServer.Start();
             LocalCache = new MemoryCache(Guid.NewGuid().ToString());
-            InvalidationManager.Configure("localhost:6379", InvalidationStrategy.Both, LocalCache, true).Wait();
+            InvalidationManager.ConfigureAsync("localhost:6379", InvalidationStrategy.Both, LocalCache, true).Wait();
         }
 
         [ClassCleanup]
@@ -111,7 +111,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             LocalCache.Add(cachekey, Guid.NewGuid(), DateTime.UtcNow.AddDays(1));
 
             // act 
-            InvalidationManager.Invalidate(cachekey);
+            InvalidationManager.InvalidateAsync(cachekey);
 
             Thread.Sleep(50);
 

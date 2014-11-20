@@ -20,32 +20,42 @@ namespace RedisMemoryCacheInvalidation.Core
         public IRedisConnection Connection { get; internal set; }
         public MemoryCache LocalCache { get; private set; }
 
-        public RedisNotificationBus(string redisConfiguration, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
+        private RedisNotificationBus(InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
         {
             this.InvalidationStrategy = policy;
             this.EnableKeySpaceNotifications = enableKeySpaceNotifications;
 
             this.LocalCache = cache ?? MemoryCache.Default;
             this.Notifier = new NotificationManager();
+        }
 
+        public RedisNotificationBus(string redisConfiguration, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
+            : this(policy, cache, enableKeySpaceNotifications)
+        {
             var config = ConfigurationOptions.Parse(redisConfiguration, true);
             this.Connection = new StackExchangeRedisConnection(config);
         }
 
-        public async Task Start()
+        public RedisNotificationBus(ConnectionMultiplexer mux, InvalidationStrategy policy = InvalidationStrategy.Both, MemoryCache cache = null, bool enableKeySpaceNotifications = false)
+            : this(policy, cache, enableKeySpaceNotifications)
         {
-            await this.Connection.Connect();
-            await Connection.SubscribeAsync(DEFAULT_INVALIDATION_CHANNEL, this.OnInvalidationMessage);
+            this.Connection = new StackExchangeRedisConnection(mux);
+        }
+
+        public async Task StartAsync()
+        {
+            await this.Connection.ConnectAsync().ConfigureAwait(false);
+            await Connection.SubscribeAsync(DEFAULT_INVALIDATION_CHANNEL, this.OnInvalidationMessage).ConfigureAwait(false);
             if (this.EnableKeySpaceNotifications)
-                await Connection.SubscribeAsync(DEFAULT_KEYSPACE_CHANNEL, this.OnKeySpaceNotificationMessage);
+                await Connection.SubscribeAsync(DEFAULT_KEYSPACE_CHANNEL, this.OnKeySpaceNotificationMessage).ConfigureAwait(false);
         }
 
-        public Task Stop()
+        public Task StopAsync()
         {
-            return this.Connection.Disconnect();
+            return this.Connection.DisconnectAsync();
         }
 
-        public Task<long> Notify(string key)
+        public Task<long> NotifyAsync(string key)
         {
             return this.Connection.PublishAsync(DEFAULT_INVALIDATION_CHANNEL, key);
         }
@@ -103,7 +113,7 @@ namespace RedisMemoryCacheInvalidation.Core
 
         public void Dispose()
         {
-            this.Stop();
+            this.StopAsync();
         }
     }
 }

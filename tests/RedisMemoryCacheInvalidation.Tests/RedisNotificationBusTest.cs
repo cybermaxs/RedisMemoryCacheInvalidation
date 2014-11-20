@@ -25,8 +25,8 @@ namespace RedisMemoryCacheInvalidation.Tests
             this.MockOfConnection = new Mock<IRedisConnection>();
             this.MockOfConnection.Setup(c => c.PublishAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(5);
             this.MockOfConnection.Setup(c => c.SubscribeAsync(It.IsAny<string>(), It.IsAny<Action<string, string>>())).Callback<string, Action<string, string>>(this.Invalidate);
-            this.MockOfConnection.Setup(c => c.Connect()).ReturnsAsync(true);
-            this.MockOfConnection.Setup(c => c.Disconnect()).Returns((Task)null);
+            this.MockOfConnection.Setup(c => c.ConnectAsync()).ReturnsAsync(true);
+            this.MockOfConnection.Setup(c => c.DisconnectAsync()).Returns((Task)null);
         }
 
         [TestMethod]
@@ -44,12 +44,12 @@ namespace RedisMemoryCacheInvalidation.Tests
             RedisNotificationBus bus = new RedisNotificationBus("localhost:6379", InvalidationStrategy.ChangeMonitorOnly);
             bus.Connection = this.MockOfConnection.Object;
 
-            var startTask = bus.Start();
+            var startTask = bus.StartAsync();
 
             Assert.IsNotNull(startTask);
             Assert.IsTrue(startTask.IsCompleted);
 
-            this.MockOfConnection.Verify(c => c.Connect(), Times.Once);
+            this.MockOfConnection.Verify(c => c.ConnectAsync(), Times.Once);
             this.MockOfConnection.Verify(c => c.SubscribeAsync(RedisNotificationBus.DEFAULT_INVALIDATION_CHANNEL, It.IsAny<Action<string, string>>()), Times.Once);
         }
 
@@ -60,7 +60,7 @@ namespace RedisMemoryCacheInvalidation.Tests
             bus.Connection = this.MockOfConnection.Object;
 
 
-            var notifyTask = bus.Notify("mykey");
+            var notifyTask = bus.NotifyAsync("mykey");
 
             Assert.IsNotNull(notifyTask);
             Assert.AreEqual(5, notifyTask.Result);
@@ -74,7 +74,7 @@ namespace RedisMemoryCacheInvalidation.Tests
             bus.Connection = this.MockOfConnection.Object;
 
 
-            var notifyTask = bus.Notify("mykey");
+            var notifyTask = bus.NotifyAsync("mykey");
 
             Assert.IsNotNull(notifyTask);
             Assert.AreEqual(5, notifyTask.Result);
@@ -89,7 +89,7 @@ namespace RedisMemoryCacheInvalidation.Tests
 
             bus.Dispose();
 
-            this.MockOfConnection.Verify(c => c.Disconnect(), Times.Once);
+            this.MockOfConnection.Verify(c => c.DisconnectAsync(), Times.Once);
         }
 
         #region InvalidationMessage
@@ -102,7 +102,7 @@ namespace RedisMemoryCacheInvalidation.Tests
             RedisChangeMonitor monitor = new RedisChangeMonitor(bus.Notifier, "mykey");
             lcache.Add("mykey", DateTime.UtcNow, new CacheItemPolicy() { AbsoluteExpiration = DateTime.UtcNow.AddDays(1), ChangeMonitors = { monitor } });
 
-            var startTask = bus.Start();
+            var startTask = bus.StartAsync();
 
             Assert.IsNotNull(startTask);
             Assert.IsTrue(startTask.IsCompleted);
@@ -124,7 +124,7 @@ namespace RedisMemoryCacheInvalidation.Tests
             RedisChangeMonitor monitor = new RedisChangeMonitor(bus.Notifier, "mykey");
             lcache.Add("mykey", DateTime.UtcNow, new CacheItemPolicy() { AbsoluteExpiration = DateTime.UtcNow.AddDays(1), ChangeMonitors = { monitor } });
 
-            var startTask = bus.Start();
+            var startTask = bus.StartAsync();
 
             Assert.IsNotNull(startTask);
             Assert.IsTrue(startTask.IsCompleted);

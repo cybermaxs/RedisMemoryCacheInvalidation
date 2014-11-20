@@ -13,37 +13,48 @@ namespace RedisMemoryCacheInvalidation.Redis
         private ConnectionMultiplexer multiplexer;
         public ConfigurationOptions ConfigurationOptions { get; private set; }
 
+        #region Ctors
         public StackExchangeRedisConnection(ConfigurationOptions configurationOptions)
         {
             this.ConfigurationOptions = configurationOptions;
+        }
+
+        public StackExchangeRedisConnection(ConnectionMultiplexer mux)
+        {
+            this.ConfigurationOptions = ConfigurationOptions.Parse(mux.Configuration);
+            this.multiplexer = mux;
         }
 
         public StackExchangeRedisConnection(string configurationOptions)
         {
             this.ConfigurationOptions = ConfigurationOptions.Parse(configurationOptions);
         }
+        #endregion
 
-        public async Task<bool> Connect()
+        public async Task<bool> ConnectAsync()
         {
-            //myope overrides here
-            this.ConfigurationOptions.ConnectTimeout = 5000;
-            this.ConfigurationOptions.ConnectRetry = 3;
-            this.ConfigurationOptions.DefaultVersion = new Version("2.8.0");
-            this.ConfigurationOptions.KeepAlive = 90;
-            this.ConfigurationOptions.AbortOnConnectFail = false;
-            this.ConfigurationOptions.ClientName = "InvalidationClient_" + System.Environment.MachineName + "_" + Assembly.GetCallingAssembly().GetName().Version;
+            if (this.multiplexer == null)
+            {
+                //myope overrides here
+                this.ConfigurationOptions.ConnectTimeout = 5000;
+                this.ConfigurationOptions.ConnectRetry = 3;
+                this.ConfigurationOptions.DefaultVersion = new Version("2.8.0");
+                this.ConfigurationOptions.KeepAlive = 90;
+                this.ConfigurationOptions.AbortOnConnectFail = false;
+                this.ConfigurationOptions.ClientName = "InvalidationClient_" + System.Environment.MachineName + "_" + Assembly.GetCallingAssembly().GetName().Version;
 
-            this.multiplexer = await ConnectionMultiplexer.ConnectAsync(ConfigurationOptions);
+                this.multiplexer = await ConnectionMultiplexer.ConnectAsync(ConfigurationOptions).ConfigureAwait(false);
+            }
 
             return this.multiplexer.IsConnected;
         }
 
-        public async Task Disconnect()
+        public async Task DisconnectAsync()
         {
-            if (this.multiplexer.IsConnected)
+            if (this.IsConnected)
             {
-                await this.UnsubscribeAllAsync();
-                await this.multiplexer.CloseAsync(false);
+                await this.UnsubscribeAllAsync().ConfigureAwait(false);
+                await this.multiplexer.CloseAsync(false).ConfigureAwait(false);
             }
         }
 

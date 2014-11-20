@@ -35,7 +35,7 @@ namespace SampleWebApplication.Controllers
 
         public ActionResult Invalidate()
         {
-            InvalidationManager.Invalidate(parentkey);
+            InvalidationManager.InvalidateAsync(parentkey);
 
             return RedirectToAction("Index");
         }

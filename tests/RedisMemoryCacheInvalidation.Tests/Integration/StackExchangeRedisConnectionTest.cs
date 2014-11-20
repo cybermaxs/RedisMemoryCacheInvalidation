@@ -15,7 +15,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("pingpong");
             Assert.IsFalse(cnx.IsConnected);
 
-            var connecttask = cnx.Connect();
+            var connecttask = cnx.ConnectAsync();
             connecttask.Wait();
 
             Assert.IsTrue(connecttask.IsCompleted);
@@ -31,7 +31,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
             Assert.IsFalse(cnx.IsConnected);
 
-            var connecttask = cnx.Connect();
+            var connecttask = cnx.ConnectAsync();
             connecttask.Wait();
 
             Assert.IsTrue(connecttask.IsCompleted);
@@ -49,12 +49,12 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
             Assert.IsFalse(cnx.IsConnected);
 
-            var connecttask = cnx.Connect();
+            var connecttask = cnx.ConnectAsync();
             connecttask.Wait();
 
             Assert.IsTrue(cnx.IsConnected);
 
-            var disconnecttask = cnx.Disconnect();
+            var disconnecttask = cnx.DisconnectAsync();
             disconnecttask.Wait();
 
            
@@ -72,7 +72,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
             Assert.IsFalse(cnx.IsConnected);
 
-            var connecttask = cnx.Connect();
+            var connecttask = cnx.ConnectAsync();
             connecttask.Wait();
 
             Assert.IsTrue(cnx.IsConnected);

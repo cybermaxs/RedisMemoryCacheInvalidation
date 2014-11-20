@@ -20,7 +20,7 @@ namespace SampleWebApplication
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //add somewhere else
-            InvalidationManager.Configure("localhost:6379", InvalidationStrategy.Both, MemoryCache.Default, false);
+            InvalidationManager.ConfigureAsync("localhost:6379", InvalidationStrategy.Both, MemoryCache.Default, false);
         }
     }
 }
