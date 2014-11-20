@@ -9,10 +9,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectUrl>https://github.com/Cybermaxs/RedisMemoryCacheInvalidation</projectUrl>
     <licenseUrl>https://raw.githubusercontent.com/Cybermaxs/RedisMemoryCacheInvalidation/master/LICENSE</licenseUrl>
-    <description>Help to invalidate local cahce items with the help of StackExchange.Redis.</description>
-    <summary>A redis-powered local memory cache invalidation</summary>
+    <description>This package allow to invalidate local memory cache items with the help of StackExchange.Redis.</description>
+    <summary>A redis-powered local memory cache invalidation mechanism.</summary>
     <copyright>Copyright 2014</copyright>
-    <tags>Redis Caching Invalidation MemoryCache</tags>
+    <tags>Redis Cache Invalidation MemoryCache NoSQL PubSub</tags>
     <dependencies>
       <group targetFramework="net40">
         <dependency id="StackExchange.Redis" version="1.0.333" />
