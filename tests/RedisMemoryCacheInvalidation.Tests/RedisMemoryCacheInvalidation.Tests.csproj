@@ -64,7 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helper\RedisServer.cs" />
-    <Compile Include="Integration\IntegrationTest.cs" />
+    <Compile Include="Integration\InvalidationTest.cs" />
     <Compile Include="Integration\StackExchangeRedisConnectionTest.cs" />
     <Compile Include="Integration\DisconnectedTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
