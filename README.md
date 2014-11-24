@@ -12,6 +12,9 @@ Install-Package RedisMemoryCacheInvalidation
 
 ## How to use it ?
 
+quick start
+---
+
 First, you have to configure the library, mainly to setup a persistent redis connection and various stuff
 ```csharp
   // somewhere in your global.asax/startup.cs
@@ -28,6 +31,13 @@ Once an invalidation message is intercepted by the library, you can invalidate o
 - `InvalidationStrategyType.ChangeMonitor` => a custom custom change monitor `InvalidationManager.CreateChangeMonitor`
 - `InvalidationStrategyType.AutoCacheRemoval` => use the automatic MemoryCache removal configured at `InvalidationSettings.ConfigureAsync`
 - `InvalidationStrategyType.External` => use the callback configured at `InvalidationSettings.InvalidationCallback`
+
+Read more 
+---
+- [Overview] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Overview.md)
+- [Working with Redis] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Redis.md)
+- [Configuration] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Configuration.md)
+- [Examples] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Examples.md)
 
 How it works ?
 ------------------
