@@ -4,16 +4,18 @@ RedisMemoryCacheInvalidation
 System.Runtime.MemoryCache invalidation using Redis PubSub feature.
 
 
-## Installing via NuGet
+Installing via NuGet
+---
 ```
 Install-Package RedisMemoryCacheInvalidation
 ```
 
 
-## How to use it ?
-
-quick start
+How to use it ?
 ---
+
+__quick start__
+
 
 First, you have to configure the library, mainly to setup a persistent redis connection and various stuff
 ```csharp
@@ -32,23 +34,22 @@ Once an invalidation message is intercepted by the library, you can invalidate o
 - `InvalidationStrategyType.AutoCacheRemoval` => use the automatic MemoryCache removal configured at `InvalidationSettings.ConfigureAsync`
 - `InvalidationStrategyType.External` => use the callback configured at `InvalidationSettings.InvalidationCallback`
 
-Read more 
----
+__Read more__
 - [Overview] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Overview.md)
 - [Working with Redis] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Redis.md)
 - [Configuration] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Configuration.md)
 - [Examples] (https://github.com/Cybermaxs/RedisMemoryCacheInvalidation/blob/master/docs/Examples.md)
 
 How it works ?
-------------------
+---
 Read the introduction post for the initial version (beginning of 2014) here : https://techblog.betclicgroup.com/2013/12/31/implementing-local-memorycache-invalidation-with-redis/
 
 License
-------------------
+---
 Licensed under the terms of the [MIT License](http://opensource.org/licenses/MIT)
 
 Want to contribute ?
-------------------
+---
 - Beginner => Download, Star, Comment/Tweet, Kudo, ...
 - Amateur => Ask for help, send feature request, send bugs
 - Pro => Pull request, promote
