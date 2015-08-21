@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation", "src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj", "{13467724-727B-44CA-BE9D-19BFC4599B34}"
 EndProject
@@ -19,13 +19,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FB54E47A-C7AA-4DBB-B575-A45678B4E278}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{3114735D-1E82-4ED9-BBA7-C9FB4B5FC9F0}"
-	ProjectSection(SolutionItems) = preProject
-		Build.proj = Build.proj
-		.build\MSBuild.Community.Tasks.dll = .build\MSBuild.Community.Tasks.dll
-		.build\MSBuild.Community.Tasks.targets = .build\MSBuild.Community.Tasks.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation_Net40", "src\RedisMemoryCacheInvalidation_Net40\RedisMemoryCacheInvalidation_Net40.csproj", "{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}"
 EndProject
