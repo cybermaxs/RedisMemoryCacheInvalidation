@@ -1,88 +1,94 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RedisMemoryCacheInvalidation.Redis;
-using RedisMemoryCacheInvalidation.Tests.Helper;
+﻿using RedisMemoryCacheInvalidation.Redis;
+using RedisMemoryCacheInvalidation.Tests.Fixtures;
 using System.Threading;
+using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Integration.Tests
 {
-    [TestClass]
-    public class StackExchangeRedisConnectionTest
+    [Collection("RedisServer")]
+    public class StackExchangeRedisConnectionTests
     {
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void StackExchangeRedisConnection_ConnectInvalidHost_WhenInvalidHost_ShouldNotBeConnected()
-        {
-            StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("pingpong");
-            Assert.IsFalse(cnx.IsConnected);
+        //private RedisServerFixture redisServer;
+        //public StackExchangeRedisConnectionTests(RedisServerFixture redisServer)
+        //{
+        //    this.redisServer = redisServer;
+        //}
 
-            var connecttask = cnx.ConnectAsync();
-            connecttask.Wait();
+        //[Fact]
+        //[Trait("Category", "Integration")]
+        //public void StackExchangeRedisConnection_ConnectInvalidHost_WhenInvalidHost_ShouldNotBeConnected()
+        //{
+        //    var cnx = new StackExchangeRedisConnection("pingpong");
+        //    Assert.False(cnx.IsConnected);
 
-            Assert.IsTrue(connecttask.IsCompleted);
-            Assert.IsFalse(cnx.IsConnected);
-        }
+        //    var connecttask = cnx.ConnectAsync();
+        //    connecttask.Wait();
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void StackExchangeRedisConnection_ConnectInvalidHost_ShouldBeConnected()
-        {
-            RedisServer.Start();
+        //    Assert.True(connecttask.IsCompleted);
+        //    Assert.False(cnx.IsConnected);
+        //}
 
-            StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
-            Assert.IsFalse(cnx.IsConnected);
+        //[Fact]
+        //[Trait("Category", "Integration")]
+        //public void StackExchangeRedisConnection_ConnectInvalidHost_ShouldBeConnected()
+        //{
+        //    this.redisServer.Reset();
 
-            var connecttask = cnx.ConnectAsync();
-            connecttask.Wait();
+        //    var cnx = new StackExchangeRedisConnection("localhost:6379");
+        //    Assert.False(cnx.IsConnected);
 
-            Assert.IsTrue(connecttask.IsCompleted);
-            Assert.IsTrue(cnx.IsConnected);
+        //    var connecttask = cnx.ConnectAsync();
+        //    connecttask.Wait();
 
-            RedisServer.Kill();
-        }
+        //    Assert.True(connecttask.IsCompleted);
+        //    Assert.True(cnx.IsConnected);
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void StackExchangeRedisConnection_DisconnectWhenConnected_ShouldBeDisconnected()
-        {
-            RedisServer.Start();
+        //    this.redisServer.Dispose();
+        //}
 
-            StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
-            Assert.IsFalse(cnx.IsConnected);
+        //[Fact]
+        //[Trait("Category", "Integration")]
+        //public void StackExchangeRedisConnection_DisconnectWhenConnected_ShouldBeDisconnected()
+        //{
+        //    RedisServer.Start();
 
-            var connecttask = cnx.ConnectAsync();
-            connecttask.Wait();
+        //    var cnx = new StackExchangeRedisConnection("localhost:6379");
+        //    Assert.False(cnx.IsConnected);
 
-            Assert.IsTrue(cnx.IsConnected);
+        //    var connecttask = cnx.ConnectAsync();
+        //    connecttask.Wait();
 
-            var disconnecttask = cnx.DisconnectAsync();
-            disconnecttask.Wait();
+        //    Assert.True(cnx.IsConnected);
+
+        //    var disconnecttask = cnx.DisconnectAsync();
+        //    disconnecttask.Wait();
 
            
-            Assert.IsFalse(cnx.IsConnected);
+        //    Assert.False(cnx.IsConnected);
 
-            RedisServer.Kill();
-        }
+        //    RedisServer.Kill();
+        //}
 
-        [TestMethod]
-        [TestCategory("Integration")]
-        public void StackExchangeRedisConnection_WhenRedisFailure_ShouldBeDisconnected()
-        {
-            RedisServer.Start();
+        //[Fact]
+        //[Trait("Category", "Integration")]
+        //public void StackExchangeRedisConnection_WhenRedisFailure_ShouldBeDisconnected()
+        //{
+        //    RedisServer.Start();
 
-            StackExchangeRedisConnection cnx = new StackExchangeRedisConnection("localhost:6379");
-            Assert.IsFalse(cnx.IsConnected);
+        //    var cnx = new StackExchangeRedisConnection("localhost:6379");
+        //    Assert.False(cnx.IsConnected);
 
-            var connecttask = cnx.ConnectAsync();
-            connecttask.Wait();
+        //    var connecttask = cnx.ConnectAsync();
+        //    connecttask.Wait();
 
-            Assert.IsTrue(cnx.IsConnected);
+        //    Assert.True(cnx.IsConnected);
 
-            RedisServer.Kill();
+        //    RedisServer.Kill();
 
-            //HACK : require to see disconnection
-            Thread.Sleep(5000);
+        //    //HACK : require to see disconnection
+        //    Thread.Sleep(5000);
 
-            Assert.IsFalse(cnx.IsConnected);
-        }
+        //    Assert.False(cnx.IsConnected);
+        //}
     }
 }

@@ -1,80 +1,58 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+﻿using Moq;
 using System;
 using System.Runtime.Caching;
+using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Tests
 {
-    [TestClass]
-    public class InvalidationManagerTest
+    public class InvalidationManagerTests
     {
         Mock<IRedisNotificationBus> MockOfBus = new Mock<IRedisNotificationBus>();
+        
 
-        [TestInitialize]
-        public void TestInitialize()
+            public InvalidationManagerTests()
         {
             InvalidationManager.notificationBus = null;
         }
 
         #region Configure
-        [TestMethod]
+        [Fact]
         public void Configure_WhenInvalid_ShouldThrowException()
         {
             var configTask = InvalidationManager.ConfigureAsync("dfsdf");
             configTask.Wait();
 
-            Assert.IsTrue(configTask.IsCompleted);
-            Assert.IsFalse(InvalidationManager.IsConnected);
+            Assert.True(configTask.IsCompleted);
+            Assert.False(InvalidationManager.IsConnected);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Fact]
         public void Configure_WhenTwice_ShouldThrowException()
         {
-            InvalidationManager.ConfigureAsync("dfsdf");
-            InvalidationManager.ConfigureAsync("dfsdf");
+            //double configuration
+            Assert.Throws<InvalidOperationException>(() => {
+                InvalidationManager.ConfigureAsync("dfsdf");
+                InvalidationManager.ConfigureAsync("dfsdf");
+            });
         }
         #endregion
 
         #region Invalid Parameters
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void CreateChangeMonitor_WhenNotConfigured_ShouldThrowException()
+        [Fact]
+        public void CreateChangeMonitorBadArgs_ShouldThrowException()
         {
-            InvalidationManager.CreateChangeMonitor("rzer");
-        }
+            //TODO
+            Assert.Throws<InvalidOperationException>(() => { InvalidationManager.CreateChangeMonitor("rzer"); });
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void CreateChangeMonitorWithCacheItem_WhenNotConfigured_ShouldThrowException()
-        {
-            InvalidationManager.CreateChangeMonitor(new CacheItem("rzesdqr"));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void Invalidate_WhenNotConfigured_ShouldThrowException()
-        {
-            InvalidationManager.InvalidateAsync("rzaaer");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateChangeMonitor_WhenNull_ShouldThrowException()
-        {
-            InvalidationManager.CreateChangeMonitor((string)null);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateChangeMonitorWithCacheItem_WhenNullCacheItem_ShouldThrowException()
-        {
-            InvalidationManager.CreateChangeMonitor((CacheItem)null);
+            Assert.Throws<InvalidOperationException>(() => { InvalidationManager.CreateChangeMonitor(new CacheItem("rzesdqr")); });
+            Assert.Throws<InvalidOperationException>(() => { InvalidationManager.InvalidateAsync("rzaaer"); });
+            Assert.Throws<ArgumentNullException>(() => { InvalidationManager.CreateChangeMonitor((string)null); });
+            Assert.Throws<ArgumentNullException>(() => { InvalidationManager.CreateChangeMonitor((CacheItem)null); });
         }
         #endregion
 
-        [TestMethod]
+        [Fact]
         public void Invalidate_WhenInvalid_ShouldPublushToRedis()
         {
             InvalidationManager.notificationBus = this.MockOfBus.Object;

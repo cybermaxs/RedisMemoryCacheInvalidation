@@ -1,22 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RedisMemoryCacheInvalidation.Tests.Helper;
+﻿using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Tests.Integration
 {
-    [TestClass]
     public class DisconnectedTest
     {
-        [TestMethod]
-        [TestCategory("Integration")]
+        [Fact]
+        [Trait("Category","Integration")]
         public void TodoTest()
         {
             //test more disconnected scenarios
             InvalidationManager.ConfigureAsync("blabblou").Wait();
             var t = InvalidationManager.InvalidateAsync("mykey");
 
-            Assert.IsNotNull(t);
-            Assert.IsTrue(t.IsFaulted);
+            Assert.NotNull(t);
+            Assert.True(t.IsFaulted);
         }
     }
 }
