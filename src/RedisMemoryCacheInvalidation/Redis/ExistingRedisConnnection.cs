@@ -7,21 +7,17 @@ namespace RedisMemoryCacheInvalidation.Redis
     {
         public ExistingRedisConnnection(IConnectionMultiplexer mux)
         {
-            Guard.NotNull(mux, nameof(mux));
             multiplexer = mux;
         }
 
         public override bool Connect()
         {
-            return this.multiplexer.IsConnected;
+            return this.IsConnected;
         }
 
         public override void Disconnect()
         {
-            if (this.IsConnected)
-            {
-                this.multiplexer.GetSubscriber().UnsubscribeAll();
-            }
+            this.UnsubscribeAll();
         }
     }
 }

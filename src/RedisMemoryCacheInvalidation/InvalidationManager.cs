@@ -13,7 +13,7 @@ namespace RedisMemoryCacheInvalidation
     /// </summary>
     public static class InvalidationManager
     {
-        internal static IRedisNotificationBus notificationBus = null;
+        internal static IRedisNotificationBus notificationBus;
 
         /// <summary>
         /// Redis connection state : connected or not.
@@ -44,7 +44,6 @@ namespace RedisMemoryCacheInvalidation
         /// A new redis connection will be establish based upon parameter redisConfig.
         /// </summary>
         /// <param name="redisConfig">StackExchange configuration settings.</param>
-        /// <param name="settings">InvalidationManager settings.(</param>
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(string redisConfig)
         {

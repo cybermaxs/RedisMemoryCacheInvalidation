@@ -2,7 +2,6 @@
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace RedisMemoryCacheInvalidation.Redis
@@ -53,16 +52,10 @@ namespace RedisMemoryCacheInvalidation.Redis
         }
         #endregion
 
-        public void Dispose()
-        {
-            if (this.multiplexer != null)
-                multiplexer.Close(false);
-        }
-
         #region privates
         protected IServer GetServer()
         {
-            EndPoint[] endpoints = this.multiplexer.GetEndPoints();
+            var endpoints = this.multiplexer.GetEndPoints();
             IServer result = null;
             foreach (var endpoint in endpoints)
             {

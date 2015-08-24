@@ -48,6 +48,10 @@
       <HintPath>..\..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ploeh.AutoFixture, Version=3.31.3.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoFixture.3.31.3\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StackExchange.Redis, Version=1.0.316.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\StackExchange.Redis.1.0.481\lib\net45\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
@@ -77,6 +81,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Redis\RedisConnectionFactoryTests.cs" />
+    <Compile Include="TestConstants.cs" />
     <Compile Include="Fixture\RedisCollection.cs" />
     <Compile Include="Fixture\RedisServerFixture.cs" />
     <Compile Include="Integration\DisconnectedTest.cs" />
@@ -87,6 +93,8 @@
     <Compile Include="NotificationManagerTest.cs" />
     <Compile Include="RedisChangeMonitorTest.cs" />
     <Compile Include="RedisNotificationBusTest.cs" />
+    <Compile Include="Redis\ExistingRedisConnectionTests.cs" />
+    <Compile Include="Redis\StandaloneRedisConnectionTests.cs" />
     <Compile Include="UnsubscriberTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,9 +107,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Redis\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

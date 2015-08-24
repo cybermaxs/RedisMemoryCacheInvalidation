@@ -1,11 +1,6 @@
-﻿using RedisMemoryCacheInvalidation.Utils;
-using StackExchange.Redis;
+﻿using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RedisMemoryCacheInvalidation.Redis
 {
@@ -14,8 +9,6 @@ namespace RedisMemoryCacheInvalidation.Redis
         private readonly ConfigurationOptions options;
         public StandaloneRedisConnection(ConfigurationOptions configurationOptions)
         {
-            Guard.NotNull(configurationOptions, nameof(configurationOptions));
-
             this.options = configurationOptions;
         }
 
@@ -39,11 +32,8 @@ namespace RedisMemoryCacheInvalidation.Redis
 
         public override void Disconnect()
         {
-            if(this.IsConnected)
-            {
-                this.multiplexer.GetSubscriber().UnsubscribeAll();
-                this.multiplexer.Close(true);
-            }
+            this.UnsubscribeAll();
+            this.multiplexer.Close(false);
         }
     }
 }
