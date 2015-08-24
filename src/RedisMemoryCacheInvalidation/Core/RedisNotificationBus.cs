@@ -32,8 +32,7 @@ namespace RedisMemoryCacheInvalidation.Core
         public RedisNotificationBus(string redisConfiguration, InvalidationSettings settings)
             : this(settings)
         {
-            var config = ConfigurationOptions.Parse(redisConfiguration, true);
-            this.Connection = RedisConnectionFactory.New(config);
+            this.Connection = RedisConnectionFactory.New(redisConfiguration);
         }
 
         public RedisNotificationBus(ConnectionMultiplexer mux, InvalidationSettings settings)

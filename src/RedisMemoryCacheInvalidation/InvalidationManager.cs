@@ -41,20 +41,6 @@ namespace RedisMemoryCacheInvalidation
 
         /// <summary>
         /// Use to Configure Redis MemoryCache Invalidation.
-        /// A new redis connection will be establish based upon parameter redisConfig.
-        /// </summary>
-        /// <param name="redisConfig">StackExchange configuration settings.</param>
-        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
-        public static void Configure(string redisConfig)
-        {
-            EnsureConfiguration();
-
-            notificationBus = new RedisNotificationBus(redisConfig, new InvalidationSettings());
-            notificationBus.Start();
-        }
-
-        /// <summary>
-        /// Use to Configure Redis MemoryCache Invalidation.
         /// </summary>
         /// <param name="mux">Reusing an existing ConnectionMultiplexer.</param>
         /// <param name="settings">InvalidationManager settings.(</param>

@@ -11,7 +11,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Redis
         [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void WhenNewWithConfigOptions_Should_Create_StandaloneRedisConnection()
         {
-            var cnx = RedisConnectionFactory.New(new ConfigurationOptions());
+            var cnx = RedisConnectionFactory.New("local:6379");
 
             Assert.IsType<StandaloneRedisConnection>(cnx);
         }

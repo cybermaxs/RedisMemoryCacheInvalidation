@@ -19,7 +19,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         [Fact]
         public void Configure_WhenInvalid_ShouldThrowException()
         {
-            InvalidationManager.Configure("dfsdf");
+            InvalidationManager.Configure("dfsdf", new InvalidationSettings());
 
             Assert.False(InvalidationManager.IsConnected);
         }
@@ -29,8 +29,8 @@ namespace RedisMemoryCacheInvalidation.Tests
         {
             //double configuration
             Assert.Throws<InvalidOperationException>(() => {
-                InvalidationManager.Configure("dfsdf");
-                InvalidationManager.Configure("dfsdf");
+                InvalidationManager.Configure("dfsdf", new InvalidationSettings());
+                InvalidationManager.Configure("dfsdf", new InvalidationSettings());
             });
         }
         #endregion

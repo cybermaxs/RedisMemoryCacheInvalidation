@@ -9,7 +9,7 @@ namespace SampleInvalidationEmitter
         {
             Console.WriteLine("Simple Invalidation Emitter");
 
-            InvalidationManager.Configure("localhost:6379");
+            InvalidationManager.Configure("localhost:6379", new InvalidationSettings());
 
             Console.WriteLine("IsConnected : "+ InvalidationManager.IsConnected);
 

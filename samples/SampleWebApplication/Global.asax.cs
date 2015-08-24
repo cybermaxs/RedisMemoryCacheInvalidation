@@ -20,7 +20,7 @@ namespace SampleWebApplication
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //add somewhere else
-            InvalidationManager.Configure("localhost:6379");
+            InvalidationManager.Configure("localhost:6379", new InvalidationSettings());
         }
     }
 }

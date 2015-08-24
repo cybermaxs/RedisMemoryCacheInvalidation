@@ -7,9 +7,9 @@ namespace RedisMemoryCacheInvalidation.Redis
     internal class StandaloneRedisConnection : RedisConnectionBase
     {
         private readonly ConfigurationOptions options;
-        public StandaloneRedisConnection(ConfigurationOptions configurationOptions)
+        public StandaloneRedisConnection(string configurationOptions)
         {
-            this.options = configurationOptions;
+            this.options = ConfigurationOptions.Parse(configurationOptions);
         }
 
         public override bool Connect()

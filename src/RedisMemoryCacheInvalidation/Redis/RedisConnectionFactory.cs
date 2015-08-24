@@ -9,7 +9,7 @@ namespace RedisMemoryCacheInvalidation.Redis
             return new ExistingRedisConnnection(mux);
         }
 
-        public static IRedisConnection New(ConfigurationOptions options)
+        public static IRedisConnection New(string options)
         {
             return new StandaloneRedisConnection(options);
         }

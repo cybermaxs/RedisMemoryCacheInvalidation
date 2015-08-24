@@ -10,8 +10,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Redis
         [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void WhenInvalidHost_Should_Not_Be_Connected()
         {
-            var options = ConfigurationOptions.Parse("local:6379");
-            var cnx = new StandaloneRedisConnection(options);
+            var cnx = new StandaloneRedisConnection("local:6379");
 
             var connected = cnx.Connect();
 
