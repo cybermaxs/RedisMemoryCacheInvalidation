@@ -11,17 +11,17 @@
     <licenseUrl>https://raw.githubusercontent.com/Cybermaxs/RedisMemoryCacheInvalidation/master/LICENSE</licenseUrl>
     <description>This package allow to invalidate local memory cache items with the help of StackExchange.Redis.</description>
     <summary>A redis-powered local memory cache invalidation mechanism.</summary>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2015</copyright>
     <tags>Redis Cache Invalidation MemoryCache NoSQL PubSub</tags>
     <dependencies>
       <group targetFramework="net40">
-        <dependency id="StackExchange.Redis" version="1.0.333" />
-        <dependency id="Microsoft.Bcl" version="1.1.9" />
+        <dependency id="StackExchange.Redis" version="1.0.481" />
+        <dependency id="Microsoft.Bcl" version="1.1.10" />
         <dependency id="Microsoft.Bcl.Async" version="1.0.168" />
-        <dependency id="Microsoft.Bcl.Build" version="1.0.14" />
+        <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
       </group>
       <group targetFramework="net45">
-        <dependency id="StackExchange.Redis" version="1.0.333" />
+        <dependency id="StackExchange.Redis" version="1.0.481" />
       </group>
     </dependencies>
   </metadata>
