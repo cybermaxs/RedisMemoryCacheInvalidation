@@ -11,20 +11,21 @@ namespace RedisMemoryCacheInvalidation.Core
     /// </summary>
     internal class RedisNotificationBus : IDisposable, IRedisNotificationBus
     {
-        public  InvalidationStrategyType InvalidationStrategy { get; set; }
-        public bool EnableKeySpaceNotifications { get; private set; }
-
-        public INotificationManager<string> Notifier { get; set; }
+        private readonly InvalidationSettings settings;
+        public INotificationManager<string> Notifier { get; private set; }
         public IRedisConnection Connection { get; internal set; }
-        public MemoryCache LocalCache { get; private set; }
-        public Action<string> NotificationCallback { get; private set; }
 
+        #region Props
+        public InvalidationStrategyType InvalidationStrategy { get { return settings.InvalidationStrategy; } }
+        public bool EnableKeySpaceNotifications { get { return settings.EnableKeySpaceNotifications; } }
+        public MemoryCache LocalCache { get { return settings.TargetCache; } }
+        public Action<string> NotificationCallback { get { return settings.InvalidationCallback; } }
+        #endregion
+
+        #region Constructors
         private RedisNotificationBus(InvalidationSettings settings)
         {
-            this.InvalidationStrategy = settings.InvalidationStrategy;
-            this.EnableKeySpaceNotifications = settings.EnableKeySpaceNotifications;
-            this.LocalCache = settings.TargetCache;
-            this.NotificationCallback = settings.InvalidationCallback;
+            this.settings = settings;
 
             this.Notifier = new NotificationManager();
         }
@@ -40,13 +41,14 @@ namespace RedisMemoryCacheInvalidation.Core
         {
             this.Connection = RedisConnectionFactory.New(mux);
         }
+        #endregion
 
         public void Start()
         {
             this.Connection.Connect();
-            Connection.Subscribe(Constants.DEFAULT_INVALIDATION_CHANNEL, this.OnInvalidationMessage);
+            Connection.Subscribe(Constants.DEFAULT_INVALIDATION_CHANNEL, OnInvalidationMessage);
             if (this.EnableKeySpaceNotifications)
-                Connection.Subscribe(Constants.DEFAULT_KEYSPACE_CHANNEL, this.OnKeySpaceNotificationMessage);
+                Connection.Subscribe(Constants.DEFAULT_KEYSPACE_CHANNEL, OnKeySpaceNotificationMessage);
         }
 
         public void Stop()
@@ -64,7 +66,7 @@ namespace RedisMemoryCacheInvalidation.Core
         {
             if (pattern == Constants.DEFAULT_INVALIDATION_CHANNEL)
             {
-                this.ProcessInvalidationMessage(data);
+                this.ProcessInvalidationMessage(data.ToString());
             }
         }
 
@@ -74,7 +76,7 @@ namespace RedisMemoryCacheInvalidation.Core
             switch (prefix)
             {
                 case "__keyevent":
-                    this.ProcessInvalidationMessage(data);
+                    this.ProcessInvalidationMessage(data.ToString());
                     break;
                 default:
                     //nop
@@ -94,7 +96,7 @@ namespace RedisMemoryCacheInvalidation.Core
 
             if ((this.InvalidationStrategy & InvalidationStrategyType.External) == InvalidationStrategyType.External)
                 if (NotificationCallback != null)
-                    NotificationCallback(key);
+                    NotificationCallback?.Invoke(key);
 
         }
 
