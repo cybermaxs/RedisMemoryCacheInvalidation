@@ -1,5 +1,6 @@
 ﻿using RedisMemoryCacheInvalidation.Core;
 using RedisMemoryCacheInvalidation.Core.Interfaces;
+using RedisMemoryCacheInvalidation.Utils;
 using System;
 using System.Globalization;
 using System.Runtime.Caching;
@@ -10,7 +11,7 @@ namespace RedisMemoryCacheInvalidation.Monitor
     {
         private readonly string uniqueId;
         private readonly string key;
-        private IDisposable unsubscriber;
+        private readonly IDisposable unsubscriber;
         /// <summary>
         /// Contructor.
         /// </summary>
@@ -18,15 +19,9 @@ namespace RedisMemoryCacheInvalidation.Monitor
         /// <param name="key">invalidation Key</param>
         public RedisChangeMonitor(INotificationManager<string> notifier, string key)
         {
-            if (notifier == null)
-            {
-                throw new ArgumentNullException(nameof(notifier));
-            }
+            Guard.NotNull(notifier, nameof(notifier));
+            Guard.NotNullOrEmpty(key, nameof(key));
 
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
             var flag = true;
             try
             {
@@ -35,7 +30,7 @@ namespace RedisMemoryCacheInvalidation.Monitor
                 this.key = key;
                 flag = false;
             }
-            catch
+            catch (Exception)
             {
                 //any error
                 flag = true;
