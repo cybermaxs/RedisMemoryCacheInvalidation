@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using RedisMemoryCacheInvalidation.Utils;
+using StackExchange.Redis;
 
 namespace RedisMemoryCacheInvalidation.Redis
 {
@@ -6,6 +7,7 @@ namespace RedisMemoryCacheInvalidation.Redis
     {
         public ExistingRedisConnnection(IConnectionMultiplexer mux)
         {
+            Guard.NotNull(mux, nameof(mux));
             multiplexer = mux;
         }
 
@@ -16,7 +18,10 @@ namespace RedisMemoryCacheInvalidation.Redis
 
         public override void Disconnect()
         {
-            //nop
+            if (this.IsConnected)
+            {
+                this.multiplexer.GetSubscriber().UnsubscribeAll();
+            }
         }
     }
 }

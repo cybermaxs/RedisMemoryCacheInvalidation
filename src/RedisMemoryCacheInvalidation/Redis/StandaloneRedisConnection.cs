@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using RedisMemoryCacheInvalidation.Utils;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace RedisMemoryCacheInvalidation.Redis
         private readonly ConfigurationOptions options;
         public StandaloneRedisConnection(ConfigurationOptions configurationOptions)
         {
+            Guard.NotNull(configurationOptions, nameof(configurationOptions));
+
             this.options = configurationOptions;
         }
 

@@ -57,6 +57,7 @@
     <Compile Include="Redis\ExistingRedisConnnection.cs" />
     <Compile Include="Redis\RedisConnectionBase.cs" />
     <Compile Include="Redis\StandaloneRedisConnection.cs" />
+    <Compile Include="Utils\Guard.cs" />
     <Compile Include="Utils\SynchronizedCollection.cs" />
     <Compile Include="Utils\TaskCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

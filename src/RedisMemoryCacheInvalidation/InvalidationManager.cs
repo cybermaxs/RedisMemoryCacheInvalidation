@@ -1,5 +1,6 @@
 ﻿using RedisMemoryCacheInvalidation.Core;
 using RedisMemoryCacheInvalidation.Monitor;
+using RedisMemoryCacheInvalidation.Utils;
 using StackExchange.Redis;
 using System;
 using System.Runtime.Caching;
@@ -32,8 +33,7 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(string redisConfig, InvalidationSettings settings)
         {
-            if (notificationBus != null)
-                throw new InvalidOperationException("Configure() was already called");
+            EnsureConfiguration();
 
             notificationBus = new RedisNotificationBus(redisConfig, settings);
             notificationBus.Start();
@@ -48,8 +48,7 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(string redisConfig)
         {
-            if (notificationBus != null)
-                throw new InvalidOperationException("Configure() was already called");
+            EnsureConfiguration();
 
             notificationBus = new RedisNotificationBus(redisConfig, new InvalidationSettings());
             notificationBus.Start();
@@ -63,8 +62,7 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(ConnectionMultiplexer mux, InvalidationSettings settings)
         {
-            if (notificationBus != null)
-                throw new InvalidOperationException("Configure() was already called");
+            EnsureConfiguration();
 
             notificationBus = new RedisNotificationBus(mux, settings);
             notificationBus.Start();
@@ -79,11 +77,9 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(string invalidationKey)
         {
-            if (string.IsNullOrEmpty(invalidationKey))
-                throw new ArgumentNullException("key");
+            Guard.NotNullOrEmpty(invalidationKey, nameof(invalidationKey));
 
-            if (notificationBus == null)
-                throw new InvalidOperationException("Configure() was not called");
+            EnsureConfiguration();
 
             if (notificationBus.InvalidationStrategy == InvalidationStrategyType.AutoCacheRemoval)
                 throw new InvalidOperationException("Could not create a change monitor when InvalidationStrategy is DefaultMemoryCacheRemoval");
@@ -98,11 +94,9 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(CacheItem item)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
+            Guard.NotNull(item, nameof(item));
 
-            if (notificationBus == null)
-                throw new InvalidOperationException("Configure() was not called");
+            EnsureConfiguration();
 
             return new RedisChangeMonitor(notificationBus.Notifier, item.Key);
         }
@@ -116,10 +110,17 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task with the number of subscribers</returns>
         public static Task<long> InvalidateAsync(string key)
         {
-            if (notificationBus == null)
-                throw new InvalidOperationException("Configure() was not called");
+            Guard.NotNullOrEmpty(key, nameof(key));
+
+            EnsureConfiguration();
 
             return notificationBus.NotifyAsync(key);
+        }
+
+        private static void EnsureConfiguration()
+        {
+            if (notificationBus == null)
+                throw new InvalidOperationException("Configure() was not called");
         }
     }
 }
