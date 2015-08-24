@@ -46,6 +46,7 @@
     <Reference Include="System.Runtime.Caching" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Core\Interfaces\INotificationObserver.cs" />
     <Compile Include="Core\Interfaces\IRedisNotificationBus.cs" />
     <Compile Include="Core\NotificationManager.cs" />
@@ -53,19 +54,19 @@
     <Compile Include="InvalidationStrategyType.cs" />
     <Compile Include="Core\Interfaces\INotificationManager.cs" />
     <Compile Include="InvalidationSettings.cs" />
+    <Compile Include="Redis\ExistingRedisConnnection.cs" />
+    <Compile Include="Redis\RedisConnectionBase.cs" />
+    <Compile Include="Redis\StandaloneRedisConnection.cs" />
     <Compile Include="Utils\SynchronizedCollection.cs" />
     <Compile Include="Utils\TaskCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InvalidationManager.cs" />
     <Compile Include="Monitor\RedisChangeMonitor.cs" />
     <Compile Include="Redis\IRedisConnection.cs" />
-    <Compile Include="Redis\StackExchangeRedisConnection.cs" />
+    <Compile Include="Redis\RedisConnectionFactory.cs" />
     <Compile Include="Core\Unsubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

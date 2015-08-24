@@ -30,13 +30,29 @@ namespace RedisMemoryCacheInvalidation
         /// <param name="redisConfig">StackExchange configuration settings.</param>
         /// <param name="settings">InvalidationManager settings.(</param>
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
-        public static Task ConfigureAsync(string redisConfig, InvalidationSettings settings=null)
+        public static void Configure(string redisConfig, InvalidationSettings settings)
         {
             if (notificationBus != null)
                 throw new InvalidOperationException("Configure() was already called");
 
             notificationBus = new RedisNotificationBus(redisConfig, settings);
-            return notificationBus.StartAsync();
+            notificationBus.Start();
+        }
+
+        /// <summary>
+        /// Use to Configure Redis MemoryCache Invalidation.
+        /// A new redis connection will be establish based upon parameter redisConfig.
+        /// </summary>
+        /// <param name="redisConfig">StackExchange configuration settings.</param>
+        /// <param name="settings">InvalidationManager settings.(</param>
+        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
+        public static void Configure(string redisConfig)
+        {
+            if (notificationBus != null)
+                throw new InvalidOperationException("Configure() was already called");
+
+            notificationBus = new RedisNotificationBus(redisConfig, new InvalidationSettings());
+            notificationBus.Start();
         }
 
         /// <summary>
@@ -45,13 +61,13 @@ namespace RedisMemoryCacheInvalidation
         /// <param name="mux">Reusing an existing ConnectionMultiplexer.</param>
         /// <param name="settings">InvalidationManager settings.(</param>
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
-        public static Task ConfigureAsync(ConnectionMultiplexer mux, InvalidationSettings settings=null)
+        public static void Configure(ConnectionMultiplexer mux, InvalidationSettings settings)
         {
             if (notificationBus != null)
                 throw new InvalidOperationException("Configure() was already called");
 
             notificationBus = new RedisNotificationBus(mux, settings);
-            return notificationBus.StartAsync();
+            notificationBus.Start();
         }
         #endregion
 
@@ -78,7 +94,7 @@ namespace RedisMemoryCacheInvalidation
         /// <summary>
         /// Allow to create a custom ChangeMonitor depending on the pubsub event (channel : invalidate, data:item.Key)
         /// </summary>
-        /// <param name="invalidationKey">invalidation key send by redis PUBLISH invalidate invalidatekey</param>
+        /// <param name="item">todo: describe item parameter on CreateChangeMonitor</param>
         /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(CacheItem item)
         {

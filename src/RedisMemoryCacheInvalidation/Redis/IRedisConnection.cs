@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackExchange.Redis;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,11 +8,11 @@ namespace RedisMemoryCacheInvalidation.Redis
     public interface IRedisConnection
     {
         bool IsConnected { get; }
-        Task<bool> ConnectAsync();
-        Task DisconnectAsync();
+        bool Connect();
+        void Disconnect();
         Task<KeyValuePair<string, string>[]> GetConfigAsync();
-        Task SubscribeAsync(string channel, Action<string, string> handler);
-        Task UnsubscribeAllAsync();
+        void Subscribe(string channel, Action<RedisChannel, RedisValue> handler);
+        void UnsubscribeAll();
         Task<long> PublishAsync(string channel, string value);
     }
 }

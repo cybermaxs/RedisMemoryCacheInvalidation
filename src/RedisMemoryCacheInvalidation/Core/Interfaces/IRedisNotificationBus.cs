@@ -13,7 +13,7 @@ namespace RedisMemoryCacheInvalidation
         MemoryCache LocalCache { get; }
         INotificationManager<string> Notifier { get; set; }
         Task<long> NotifyAsync(string key);
-        Task StartAsync();
-        Task StopAsync();
+        void Start();
+        void Stop();
     }
 }

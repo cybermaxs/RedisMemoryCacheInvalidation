@@ -11,9 +11,7 @@ namespace RedisMemoryCacheInvalidation.Core
     /// </summary>
     internal class RedisNotificationBus : IDisposable, IRedisNotificationBus
     {
-        public const string DEFAULT_INVALIDATION_CHANNEL = "invalidate";
-        public const string DEFAULT_KEYSPACE_CHANNEL = "__keyevent*__:*";
-        public InvalidationStrategyType InvalidationStrategy { get; set; }
+        public  InvalidationStrategyType InvalidationStrategy { get; set; }
         public bool EnableKeySpaceNotifications { get; private set; }
 
         public INotificationManager<string> Notifier { get; set; }
@@ -23,8 +21,6 @@ namespace RedisMemoryCacheInvalidation.Core
 
         private RedisNotificationBus(InvalidationSettings settings)
         {
-            settings = settings ?? new InvalidationSettings();
-
             this.InvalidationStrategy = settings.InvalidationStrategy;
             this.EnableKeySpaceNotifications = settings.EnableKeySpaceNotifications;
             this.LocalCache = settings.TargetCache;
@@ -33,49 +29,49 @@ namespace RedisMemoryCacheInvalidation.Core
             this.Notifier = new NotificationManager();
         }
 
-        public RedisNotificationBus(string redisConfiguration, InvalidationSettings settings=null)
+        public RedisNotificationBus(string redisConfiguration, InvalidationSettings settings)
             : this(settings)
         {
             var config = ConfigurationOptions.Parse(redisConfiguration, true);
-            this.Connection = new StackExchangeRedisConnection(config);
+            this.Connection = RedisConnectionFactory.New(config);
         }
 
-        public RedisNotificationBus(ConnectionMultiplexer mux, InvalidationSettings settings = null)
+        public RedisNotificationBus(ConnectionMultiplexer mux, InvalidationSettings settings)
             : this(settings)
         {
-            this.Connection = new StackExchangeRedisConnection(mux);
+            this.Connection = RedisConnectionFactory.New(mux);
         }
 
-        public async Task StartAsync()
+        public void Start()
         {
-            await this.Connection.ConnectAsync().ConfigureAwait(false);
-            await Connection.SubscribeAsync(DEFAULT_INVALIDATION_CHANNEL, this.OnInvalidationMessage).ConfigureAwait(false);
+            this.Connection.Connect();
+            Connection.Subscribe(Constants.DEFAULT_INVALIDATION_CHANNEL, this.OnInvalidationMessage);
             if (this.EnableKeySpaceNotifications)
-                await Connection.SubscribeAsync(DEFAULT_KEYSPACE_CHANNEL, this.OnKeySpaceNotificationMessage).ConfigureAwait(false);
+                Connection.Subscribe(Constants.DEFAULT_KEYSPACE_CHANNEL, this.OnKeySpaceNotificationMessage);
         }
 
-        public Task StopAsync()
+        public void Stop()
         {
-            return this.Connection.DisconnectAsync();
+            this.Connection.Disconnect();
         }
 
         public Task<long> NotifyAsync(string key)
         {
-            return this.Connection.PublishAsync(DEFAULT_INVALIDATION_CHANNEL, key);
+            return this.Connection.PublishAsync(Constants.DEFAULT_INVALIDATION_CHANNEL, key);
         }
 
         #region Notification Handlers
-        private void OnInvalidationMessage(string pattern, string data)
+        private void OnInvalidationMessage(RedisChannel pattern, RedisValue data)
         {
-            if (pattern == DEFAULT_INVALIDATION_CHANNEL)
+            if (pattern == Constants.DEFAULT_INVALIDATION_CHANNEL)
             {
                 this.ProcessInvalidationMessage(data);
             }
         }
 
-        private void OnKeySpaceNotificationMessage(string pattern, string data)
+        private void OnKeySpaceNotificationMessage(RedisChannel pattern, RedisValue data)
         {
-            string prefix = pattern.Substring(0, 10);
+            var prefix = pattern.ToString().Substring(0, 10);
             switch (prefix)
             {
                 case "__keyevent":
@@ -105,7 +101,7 @@ namespace RedisMemoryCacheInvalidation.Core
 
         public void Dispose()
         {
-            this.StopAsync();
+            this.Stop();
         }
     }
 }

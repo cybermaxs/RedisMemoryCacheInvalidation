@@ -9,7 +9,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Integration
         public void TodoTest()
         {
             //test more disconnected scenarios
-            InvalidationManager.ConfigureAsync("blabblou").Wait();
+            InvalidationManager.Configure("blabblou");
             var t = InvalidationManager.InvalidateAsync("mykey");
 
             Assert.NotNull(t);

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 namespace RedisMemoryCacheInvalidation.Utils
 {
-    [ExcludeFromCodeCoverage]
     internal class TaskCache
     {
         public static readonly Task<bool> AlwaysTrue = MakeTask(true);

@@ -20,7 +20,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
         {
             LocalCache = new MemoryCache(Guid.NewGuid().ToString());
             redisServer.Reset();
-            InvalidationManager.ConfigureAsync("localhost:6379", new InvalidationSettings() { InvalidationStrategy = InvalidationStrategyType.All, EnableKeySpaceNotifications = true, TargetCache = LocalCache }).Wait();
+            InvalidationManager.Configure("localhost:6379", new InvalidationSettings() { InvalidationStrategy = InvalidationStrategyType.All, EnableKeySpaceNotifications = true, TargetCache = LocalCache });
 
             //reset cache
             LocalCache.Trim(100);
@@ -45,7 +45,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             //act 
             using (var cnx = ConnectionMultiplexer.Connect("localhost:6379"))
             {
-                cnx.GetSubscriber().Publish(RedisNotificationBus.DEFAULT_INVALIDATION_CHANNEL, Encoding.Default.GetBytes(invalidationKey));
+                cnx.GetSubscriber().Publish(Constants.DEFAULT_INVALIDATION_CHANNEL, Encoding.Default.GetBytes(invalidationKey));
             }
 
             // hack wait for notif

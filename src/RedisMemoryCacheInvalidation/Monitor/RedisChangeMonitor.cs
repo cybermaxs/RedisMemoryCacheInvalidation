@@ -20,14 +20,14 @@ namespace RedisMemoryCacheInvalidation.Monitor
         {
             if (notifier == null)
             {
-                throw new ArgumentNullException("notificationBus");
+                throw new ArgumentNullException(nameof(notifier));
             }
 
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException("key");
+                throw new ArgumentNullException(nameof(key));
             }
-            bool flag = true;
+            var flag = true;
             try
             {
                 this.unsubscriber = notifier.Subscribe(key, this);
