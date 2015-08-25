@@ -24,6 +24,7 @@ before_build:
 artifacts:
   - path: src\**\bin\Release\RedisMemoryCacheInvalidation*.*
     name: Assemblies
+  - path: '**\*.nupkg' # find all NuGet packages recursively
 
 test:
   categories:
