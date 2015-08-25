@@ -9,9 +9,9 @@ namespace RedisMemoryCacheInvalidation.Core
     /// <summary>
     /// Manager subscriptions and notifications.
     /// </summary>
-    public class NotificationManager : INotificationManager<string>
+    internal class NotificationManager : INotificationManager<string>
     {
-        public ConcurrentDictionary<string, SynchronizedCollection<INotificationObserver<string>>> SubscriptionsByTopic { get; set; }
+        internal ConcurrentDictionary<string, SynchronizedCollection<INotificationObserver<string>>> SubscriptionsByTopic { get; set; }
 
         public NotificationManager()
         {
@@ -28,9 +28,9 @@ namespace RedisMemoryCacheInvalidation.Core
                 }
         }
 
-        public IDisposable Subscribe(string key, INotificationObserver<string> observer)
+        public IDisposable Subscribe(string topicKey, INotificationObserver<string> observer)
         {
-            var subscriptions = SubscriptionsByTopic.GetOrAdd(key, new SynchronizedCollection<INotificationObserver<string>>());
+            var subscriptions = SubscriptionsByTopic.GetOrAdd(topicKey, new SynchronizedCollection<INotificationObserver<string>>());
 
             if (!subscriptions.Contains(observer))
                 subscriptions.Add(observer);

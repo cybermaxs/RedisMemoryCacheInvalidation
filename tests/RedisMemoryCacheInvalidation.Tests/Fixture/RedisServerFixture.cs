@@ -11,7 +11,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Fixtures
         private Process server;
         private ConnectionMultiplexer mux;
 
-        private bool wasStarted = false;
+        private bool wasStarted;
 
         public RedisServerFixture()
         {
@@ -22,6 +22,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Fixtures
             }
             Thread.Sleep(1000);
             this.mux = ConnectionMultiplexer.Connect("localhost:6379,allowAdmin=true");
+            this.mux.GetServer("localhost: 6379").ConfigSet("notify-keyspace-events", "KEA");
         }
 
         public void Dispose()
@@ -36,6 +37,11 @@ namespace RedisMemoryCacheInvalidation.Tests.Fixtures
         public IDatabase GetDatabase(int db)
         {
             return this.mux.GetDatabase(db);
+        }
+
+        public ISubscriber GetSubscriber()
+        {
+            return this.mux.GetSubscriber();
         }
 
         public static bool IsRunning

@@ -8,7 +8,6 @@ namespace RedisMemoryCacheInvalidation
     public interface IRedisNotificationBus
     {
         IRedisConnection Connection { get; }
-        void Dispose();
         InvalidationStrategyType InvalidationStrategy { get; }
         MemoryCache LocalCache { get; }
         INotificationManager<string> Notifier { get;  }

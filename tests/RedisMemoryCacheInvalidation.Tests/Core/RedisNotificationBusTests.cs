@@ -5,10 +5,9 @@ using RedisMemoryCacheInvalidation.Redis;
 using StackExchange.Redis;
 using System;
 using System.Runtime.Caching;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace RedisMemoryCacheInvalidation.Tests
+namespace RedisMemoryCacheInvalidation.Tests.Core
 {
     public class RedisNotificationBusTests
     {
@@ -29,6 +28,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenInvalidCtorArgs_ShouldNotThrowExceptions()
         {
             var bus = new RedisNotificationBus("fghfgh", new InvalidationSettings());
@@ -38,6 +38,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenStart_ShouldConnectAndSubscribe()
         {
             var bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings());
@@ -50,6 +51,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenNotify_ShouldPublishAsync()
         {
             var bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings());
@@ -64,6 +66,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenStop_ShouldDisconnect()
         {
             var bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings());
@@ -77,19 +80,10 @@ namespace RedisMemoryCacheInvalidation.Tests
             this.MockOfConnection.Verify(c => c.PublishAsync(Constants.DEFAULT_INVALIDATION_CHANNEL, "mykey"), Times.Once);
         }
 
-        [Fact]
-        public void RedisNotificationBus_WhenDispose_ShouldDisconnect()
-        {
-            var bus = new RedisNotificationBus("localhost:6379", new InvalidationSettings());
-            bus.Connection = this.MockOfConnection.Object;
-
-            bus.Dispose();
-
-            this.MockOfConnection.Verify(c => c.Disconnect(), Times.Once);
-        }
 
         #region InvalidationMessage
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenInvalidation_ShouldRemoveFromDefaultCache()
         {
             var lcache = new MemoryCache(Guid.NewGuid().ToString());
@@ -109,6 +103,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenInvalidation_ShouldDisposeMonitor()
         {
             var lcache = new MemoryCache(Guid.NewGuid().ToString());
@@ -128,6 +123,7 @@ namespace RedisMemoryCacheInvalidation.Tests
         }
 
         [Fact]
+        [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void RedisNotificationBus_WhenInvalidation_ShouldInvokeCallback()
         {
             var lcache = new MemoryCache(Guid.NewGuid().ToString());

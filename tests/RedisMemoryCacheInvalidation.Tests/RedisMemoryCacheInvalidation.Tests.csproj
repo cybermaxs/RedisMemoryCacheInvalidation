@@ -85,17 +85,16 @@
     <Compile Include="TestConstants.cs" />
     <Compile Include="Fixture\RedisCollection.cs" />
     <Compile Include="Fixture\RedisServerFixture.cs" />
-    <Compile Include="Integration\DisconnectedTest.cs" />
-    <Compile Include="Integration\InvalidationTest.cs" />
-    <Compile Include="Integration\StackExchangeRedisConnectionTest.cs" />
+    <Compile Include="Integration\DisconnectedTests.cs" />
+    <Compile Include="Integration\InvalidationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InvalidationManagerTest.cs" />
-    <Compile Include="NotificationManagerTest.cs" />
+    <Compile Include="Core\InvalidationManagerTests.cs" />
+    <Compile Include="Core\NotificationManagerTests.cs" />
     <Compile Include="Monitor\RedisChangeMonitorTest.cs" />
-    <Compile Include="RedisNotificationBusTest.cs" />
+    <Compile Include="Core\RedisNotificationBusTests.cs" />
     <Compile Include="Redis\ExistingRedisConnectionTests.cs" />
     <Compile Include="Redis\StandaloneRedisConnectionTests.cs" />
-    <Compile Include="UnsubscriberTest.cs" />
+    <Compile Include="Core\UnsubscriberTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj">

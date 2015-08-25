@@ -33,10 +33,11 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(string redisConfig, InvalidationSettings settings)
         {
-            EnsureConfiguration();
-
-            notificationBus = new RedisNotificationBus(redisConfig, settings);
-            notificationBus.Start();
+            if (notificationBus == null)
+            {
+                notificationBus = new RedisNotificationBus(redisConfig, settings);
+                notificationBus.Start();
+            }
         }
 
         /// <summary>
@@ -47,10 +48,11 @@ namespace RedisMemoryCacheInvalidation
         /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
         public static void Configure(ConnectionMultiplexer mux, InvalidationSettings settings)
         {
-            EnsureConfiguration();
-
-            notificationBus = new RedisNotificationBus(mux, settings);
-            notificationBus.Start();
+            if (notificationBus == null)
+            {
+                notificationBus = new RedisNotificationBus(mux, settings);
+                notificationBus.Start();
+            }
         }
         #endregion
 

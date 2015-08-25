@@ -9,7 +9,7 @@ namespace RedisMemoryCacheInvalidation.Core
     /// <summary>
     /// Invalidation message bus. 
     /// </summary>
-    internal class RedisNotificationBus : IDisposable, IRedisNotificationBus
+    internal class RedisNotificationBus : IRedisNotificationBus
     {
         private readonly InvalidationSettings settings;
         public INotificationManager<string> Notifier { get; private set; }
@@ -98,11 +98,6 @@ namespace RedisMemoryCacheInvalidation.Core
                 if (NotificationCallback != null)
                     NotificationCallback?.Invoke(key);
 
-        }
-
-        public void Dispose()
-        {
-            this.Stop();
         }
     }
 }
