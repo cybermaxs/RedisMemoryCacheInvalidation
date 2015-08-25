@@ -20,11 +20,13 @@ build:
 
 before_build:
 - nuget restore
+after_build:
+- ps: pack.ps1
 
 artifacts:
   - path: src\**\bin\Release\RedisMemoryCacheInvalidation*.*
     name: Assemblies
-  - path: '**\*.nupkg' # find all NuGet packages recursively
+  - path: '*.nupkg' # find all NuGet packages recursively
 
 test:
   categories:
