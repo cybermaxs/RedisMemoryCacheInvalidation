@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>RedisMemoryCacheInvalidation</id>
-    <version>1.0.14474.1</version>
+    <version>$version$</version>
     <title>RedisMemoryCacheInvalidation</title>
     <authors>Cybermaxs</authors>
     <owners>Cybermaxs</owners>
@@ -26,7 +26,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\RedisMemoryCacheInvalidation\bin\Release\RedisMemoryCacheInvalidation.dll" target="lib\net45" />
-    <file src="src\RedisMemoryCacheInvalidation_Net40\bin\Release\RedisMemoryCacheInvalidation.dll" target="lib\net40" />
+    <file src="src\RedisMemoryCacheInvalidation\bin\Release\RedisMemoryCacheInvalidation*.*" target="lib\net45" />
+    <file src="src\RedisMemoryCacheInvalidation_Net40\bin\Release\RedisMemoryCacheInvalidation*.*" target="lib\net40" />
   </files>
 </package>
