@@ -6,4 +6,4 @@ $content = $content -replace '\$version\$',$versionStr
 
 $content | Out-File $root\RedisMemoryCacheInvalidation.compiled.nuspec
 
-& $root\nuget\NuGet.exe pack $root\RedisMemoryCacheInvalidation.compiled.nuspec
+& nuget pack $root\RedisMemoryCacheInvalidation.compiled.nuspec
