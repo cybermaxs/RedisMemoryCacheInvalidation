@@ -24,7 +24,7 @@ namespace RedisMemoryCacheInvalidation
 
         public InvalidationSettings()
         {
-            this.InvalidationStrategy = InvalidationStrategyType.AutoCacheRemoval;
+            this.InvalidationStrategy = InvalidationStrategyType.All;
             this.TargetCache = MemoryCache.Default;
             this.EnableKeySpaceNotifications = false;
             this.InvalidationCallback = null;
