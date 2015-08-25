@@ -1,4 +1,4 @@
-./packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:%xunit20%\xunit.console.x86 "-targetargs:""tests\RedisMemoryCacheInvalidation.Tests\bin\$env:CONFIGURATION\RedisMemoryCacheInvalidation.dll"" /noshadow /appveyor -notrait ""category=Integration""" -filter:"+[RedisMemoryCacheInvalidation*]*" -output:opencoverCoverage.xml
+./packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:packages\xunit.runner.console.2.0.0\tools\xunit.console.x86.exe "-targetargs:""tests\RedisMemoryCacheInvalidation.Tests\bin\$env:CONFIGURATION\RedisMemoryCacheInvalidation.dll"" /noshadow /appveyor -notrait ""category=Integration""" -filter:"+[RedisMemoryCacheInvalidation*]*" -output:opencoverCoverage.xml
 
 $coveralls = (Resolve-Path "./packages/coveralls.net.*/tools/csmacnz.coveralls.exe").ToString()
 
