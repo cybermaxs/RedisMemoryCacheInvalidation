@@ -21,6 +21,10 @@ build:
 before_build:
 - nuget restore
 
+artifacts:
+  - path: src\**\bin\Release\RedisMemoryCacheInvalidation*.*
+    name: Assemblies
+
 test:
   categories:
     except:
