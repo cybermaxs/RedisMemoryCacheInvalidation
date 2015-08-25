@@ -1,6 +1,8 @@
 RedisMemoryCacheInvalidation
 ============================
 
+[![Build status](https://ci.appveyor.com/api/projects/status/o64bqf543kype8eq?svg=true)](https://ci.appveyor.com/project/Cybermaxs/redismemorycacheinvalidation)
+
 System.Runtime.MemoryCache invalidation using Redis PubSub feature.
 
 
@@ -20,7 +22,7 @@ __quick start__
 First, you have to configure the library, mainly to setup a persistent redis connection and various stuff
 ```csharp
   // somewhere in your global.asax/startup.cs
-  InvalidationManager.ConfigureAsync("localhost:6379");
+  InvalidationManager.Configure("localhost:6379", new InvalidationSettings());
 ```
 Redis connection string follow [StackExchange.Redis Configuration model](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md)
 
