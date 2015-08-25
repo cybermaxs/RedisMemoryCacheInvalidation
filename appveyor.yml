@@ -21,7 +21,7 @@ build:
 before_build:
 - nuget restore
 after_build:
-- ps: pack.ps1
+- ps: .\pack.ps1
 
 artifacts:
   - path: src\**\bin\Release\RedisMemoryCacheInvalidation*.*
