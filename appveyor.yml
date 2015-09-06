@@ -30,3 +30,6 @@ test:
   categories:
     except:
     - Integration
+    
+test_script:
+- ps: .\test.ps1
