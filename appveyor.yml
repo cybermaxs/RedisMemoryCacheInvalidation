@@ -17,7 +17,7 @@ build:
 before_build:
 - nuget restore
 after_build:
-- ps: .\pack.ps1
+- ps: .\scripts\pack.ps1
 
 artifacts:
   - path: '*.nupkg' # find all NuGet packages recursively
@@ -28,4 +28,4 @@ test:
     - Integration
     
 test_script:
-- ps: .\test.ps1
+- ps: .\scripts\run_tests.ps1
