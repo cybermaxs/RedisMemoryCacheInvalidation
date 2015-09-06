@@ -4,6 +4,7 @@ RedisMemoryCacheInvalidation
 [![Build status](https://ci.appveyor.com/api/projects/status/o64bqf543kype8eq?svg=true)](https://ci.appveyor.com/project/Cybermaxs/redismemorycacheinvalidation)
 [![Nuget](https://img.shields.io/nuget/dt/redismemorycacheinvalidation.svg)](http://nuget.org/packages/redismemorycacheinvalidation)
 [![Nuget](https://img.shields.io/nuget/v/redismemorycacheinvalidation.svg)](http://nuget.org/packages/redismemorycacheinvalidation)
+[![Coverage Status](https://coveralls.io/repos/Cybermaxs/RedisMemoryCacheInvalidation/badge.svg?branch=master&service=github)](https://coveralls.io/github/Cybermaxs/RedisMemoryCacheInvalidation?branch=master)
 
 System.Runtime.MemoryCache invalidation using Redis PubSub feature.
 
