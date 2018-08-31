@@ -15,17 +15,18 @@ namespace RedisMemoryCacheInvalidation.Core
 
         public NotificationManager()
         {
-            this.SubscriptionsByTopic = new ConcurrentDictionary<string, SynchronizedCollection<INotificationObserver<string>>>();
+            SubscriptionsByTopic = new ConcurrentDictionary<string, SynchronizedCollection<INotificationObserver<string>>>();
         }
         public void Notify(string topicKey)
         {
             var subscriptions = SubscriptionsByTopic.GetOrAdd(topicKey, new SynchronizedCollection<INotificationObserver<string>>());
 
-            if (subscriptions.Count > 0)
-                foreach (INotificationObserver<string> observer in subscriptions.ToList()) //avoid collection modified
-                {
-                    observer.Notify(topicKey);
-                }
+            if (subscriptions.Count <= 0) return;
+
+            foreach (INotificationObserver<string> observer in subscriptions.ToList()) //avoid collection modified
+            {
+                observer.Notify(topicKey);
+            }
         }
 
         public IDisposable Subscribe(string topicKey, INotificationObserver<string> observer)

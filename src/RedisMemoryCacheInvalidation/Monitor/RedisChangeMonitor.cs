@@ -9,11 +9,11 @@ namespace RedisMemoryCacheInvalidation.Monitor
 {
     public class RedisChangeMonitor : ChangeMonitor, INotificationObserver<string>
     {
-        private readonly string uniqueId;
-        private readonly string key;
-        private readonly IDisposable unsubscriber;
+        private readonly string _key;
+        private readonly IDisposable _unsubscriber;
+
         /// <summary>
-        /// Contructor.
+        /// RedisChangeMonitor.
         /// </summary>
         /// <param name="notifier">Registration handler</param>
         /// <param name="key">invalidation Key</param>
@@ -25,9 +25,9 @@ namespace RedisMemoryCacheInvalidation.Monitor
             var flag = true;
             try
             {
-                this.unsubscriber = notifier.Subscribe(key, this);
-                this.uniqueId = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
-                this.key = key;
+                _unsubscriber = notifier.Subscribe(key, this);
+                UniqueId = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+                _key = key;
                 flag = false;
             }
             catch (Exception)
@@ -37,7 +37,7 @@ namespace RedisMemoryCacheInvalidation.Monitor
             }
             finally
             {
-                base.InitializationComplete();
+                InitializationComplete();
                 if (flag)
                 {
                     base.Dispose();
@@ -48,26 +48,22 @@ namespace RedisMemoryCacheInvalidation.Monitor
         protected override void Dispose(bool disposing)
         {
             // always Unsubscribe on dispose
-            this.Unsubscribe();
+            Unsubscribe();
         }
 
-        public override string UniqueId
-        {
-            get { return this.uniqueId; }
-        }
+        public override string UniqueId { get; }
 
-        #region INotification
         public void Notify(string value)
         {
-            if (value == key)
-                base.OnChanged(null);
+            if (value == _key)
+            {
+                OnChanged(null);
+            }
         }
-        #endregion
 
         private void Unsubscribe()
         {
-            if (this.unsubscriber != null)
-                this.unsubscriber.Dispose();
+            _unsubscriber?.Dispose();
         }
     }
 }

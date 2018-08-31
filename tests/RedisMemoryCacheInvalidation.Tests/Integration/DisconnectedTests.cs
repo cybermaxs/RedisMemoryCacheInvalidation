@@ -6,7 +6,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Integration
     {
         public DisconnectedTests()
         {
-            InvalidationManager.notificationBus = null;
+            InvalidationManager.NotificationBus = null;
         }
 
         [Fact]

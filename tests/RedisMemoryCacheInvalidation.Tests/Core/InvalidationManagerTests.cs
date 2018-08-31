@@ -7,16 +7,14 @@ namespace RedisMemoryCacheInvalidation.Tests
 {
     public class InvalidationManagerTests
     {
-        private readonly Mock<IRedisNotificationBus> mockOfBus;
-
+        private readonly Mock<IRedisNotificationBus> _mockOfBus;
 
         public InvalidationManagerTests()
         {
-            InvalidationManager.notificationBus = null;
-            mockOfBus = new Mock<IRedisNotificationBus>();
+            InvalidationManager.NotificationBus = null;
+            _mockOfBus = new Mock<IRedisNotificationBus>();
         }
 
-        #region Configure
         [Fact]
         [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
         public void Configure_WhenInvalid_ShouldThrowException()
@@ -33,9 +31,6 @@ namespace RedisMemoryCacheInvalidation.Tests
             InvalidationManager.Configure("dfsdf", new InvalidationSettings());
             InvalidationManager.Configure("dfsdf", new InvalidationSettings());
         }
-        #endregion
-
-        #region Invalid Parameters
 
         [Fact]
         [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
@@ -47,15 +42,14 @@ namespace RedisMemoryCacheInvalidation.Tests
             Assert.Throws<ArgumentNullException>(() => { InvalidationManager.CreateChangeMonitor((string)null); });
             Assert.Throws<ArgumentNullException>(() => { InvalidationManager.CreateChangeMonitor((CacheItem)null); });
         }
-        #endregion
 
         [Fact]
         [Trait(TestConstants.TestCategory, TestConstants.UnitTestCategory)]
-        public void Invalidate_WhenInvalid_ShouldPublushToRedis()
+        public void Invalidate_WhenInvalid_ShouldPublishToRedis()
         {
-            InvalidationManager.notificationBus = this.mockOfBus.Object;
+            InvalidationManager.NotificationBus = this._mockOfBus.Object;
             InvalidationManager.InvalidateAsync("mykey");
-            this.mockOfBus.Verify(b => b.NotifyAsync("mykey"), Times.Once);
+            this._mockOfBus.Verify(b => b.NotifyAsync("mykey"), Times.Once);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation", "src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj", "{13467724-727B-44CA-BE9D-19BFC4599B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisMemoryCacheInvalidation", "src\RedisMemoryCacheInvalidation\RedisMemoryCacheInvalidation.csproj", "{13467724-727B-44CA-BE9D-19BFC4599B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation.Tests", "tests\RedisMemoryCacheInvalidation.Tests\RedisMemoryCacheInvalidation.Tests.csproj", "{40A11C38-D401-47D2-87A7-35F4019D496B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisMemoryCacheInvalidation.Tests", "tests\RedisMemoryCacheInvalidation.Tests\RedisMemoryCacheInvalidation.Tests.csproj", "{40A11C38-D401-47D2-87A7-35F4019D496B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2570F5F6-E99B-4968-A0CC-5008554444B9}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,15 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2570F5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{34FE30CE-858A-4880-8A6E-BD0451757602}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FB54E47A-C7AA-4DBB-B575-A45678B4E278}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisMemoryCacheInvalidation_Net40", "src\RedisMemoryCacheInvalidation_Net40\RedisMemoryCacheInvalidation_Net40.csproj", "{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWebApplication", "samples\SampleWebApplication\SampleWebApplication.csproj", "{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInvalidationEmitter", "samples\SampleInvalidationEmitter\SampleInvalidationEmitter.csproj", "{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,18 +31,6 @@ Global
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40A11C38-D401-47D2-87A7-35F4019D496B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,8 +38,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{13467724-727B-44CA-BE9D-19BFC4599B34} = {FB54E47A-C7AA-4DBB-B575-A45678B4E278}
 		{40A11C38-D401-47D2-87A7-35F4019D496B} = {34FE30CE-858A-4880-8A6E-BD0451757602}
-		{CC9DCBE7-B6B8-4F13-9768-B90DB619B8DB} = {FB54E47A-C7AA-4DBB-B575-A45678B4E278}
-		{C1FB7FF5-7FEF-4770-A570-BA3F578ED0EA} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
-		{CBAE0FB2-0706-456F-8CF8-6F548F2E4161} = {96F870E2-ADD6-48CB-B04A-F4A1B4357CA6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EE92527-649E-4717-8A31-7DD7BC7F4C03}
 	EndGlobalSection
 EndGlobal

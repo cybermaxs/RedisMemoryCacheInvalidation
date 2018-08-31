@@ -1,5 +1,4 @@
 ﻿using RedisMemoryCacheInvalidation.Redis;
-using StackExchange.Redis;
 using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Tests.Redis

@@ -9,31 +9,31 @@ namespace RedisMemoryCacheInvalidation.Redis
         private readonly ConfigurationOptions options;
         public StandaloneRedisConnection(string configurationOptions)
         {
-            this.options = ConfigurationOptions.Parse(configurationOptions);
+            options = ConfigurationOptions.Parse(configurationOptions);
         }
 
         public override bool Connect()
         {
-            if (this.multiplexer == null)
+            if (multiplexer == null)
             {
                 //myope overrides here
-                this.options.ConnectTimeout = 5000;
-                this.options.ConnectRetry = 3;
-                this.options.DefaultVersion = new Version("2.8.0");
-                this.options.KeepAlive = 90;
-                this.options.AbortOnConnectFail = false;
-                this.options.ClientName = "InvalidationClient_" + System.Environment.MachineName + "_" + Assembly.GetCallingAssembly().GetName().Version;
+                options.ConnectTimeout = 5000;
+                options.ConnectRetry = 3;
+                options.DefaultVersion = new Version("2.8.0");
+                options.KeepAlive = 90;
+                options.AbortOnConnectFail = false;
+                options.ClientName = "InvalidationClient_" + Environment.MachineName + "_" + Assembly.GetCallingAssembly().GetName().Version;
 
-                this.multiplexer = ConnectionMultiplexer.Connect(options);
+                multiplexer = ConnectionMultiplexer.Connect(options);
             }
 
-            return this.multiplexer.IsConnected;
+            return multiplexer.IsConnected;
         }
 
         public override void Disconnect()
         {
-            this.UnsubscribeAll();
-            this.multiplexer.Close(false);
+            UnsubscribeAll();
+            multiplexer.Close(false);
         }
     }
 }

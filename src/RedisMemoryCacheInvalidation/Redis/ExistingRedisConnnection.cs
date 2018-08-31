@@ -12,12 +12,12 @@ namespace RedisMemoryCacheInvalidation.Redis
 
         public override bool Connect()
         {
-            return this.IsConnected;
+            return IsConnected;
         }
 
         public override void Disconnect()
         {
-            this.UnsubscribeAll();
+            UnsubscribeAll();
         }
     }
 }

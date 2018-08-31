@@ -7,66 +7,61 @@ using System.Threading.Tasks;
 namespace RedisMemoryCacheInvalidation.Core
 {
     /// <summary>
-    /// Invalidation message bus. 
+    /// Invalidation message bus.
     /// </summary>
     internal class RedisNotificationBus : IRedisNotificationBus
     {
-        private readonly InvalidationSettings settings;
+        private readonly InvalidationSettings _settings;
         public INotificationManager<string> Notifier { get; private set; }
         public IRedisConnection Connection { get; internal set; }
 
-        #region Props
-        public InvalidationStrategyType InvalidationStrategy { get { return settings.InvalidationStrategy; } }
-        public bool EnableKeySpaceNotifications { get { return settings.EnableKeySpaceNotifications; } }
-        public MemoryCache LocalCache { get { return settings.TargetCache; } }
-        public Action<string> NotificationCallback { get { return settings.InvalidationCallback; } }
-        #endregion
+        public InvalidationStrategyType InvalidationStrategy => _settings.InvalidationStrategy;
+        public bool EnableKeySpaceNotifications => _settings.EnableKeySpaceNotifications;
+        public MemoryCache LocalCache => _settings.TargetCache;
+        public Action<string> NotificationCallback => _settings.InvalidationCallback;
 
-        #region Constructors
         private RedisNotificationBus(InvalidationSettings settings)
         {
-            this.settings = settings;
+            _settings = settings;
 
-            this.Notifier = new NotificationManager();
+            Notifier = new NotificationManager();
         }
 
         public RedisNotificationBus(string redisConfiguration, InvalidationSettings settings)
             : this(settings)
         {
-            this.Connection = RedisConnectionFactory.New(redisConfiguration);
+            Connection = RedisConnectionFactory.New(redisConfiguration);
         }
 
         public RedisNotificationBus(ConnectionMultiplexer mux, InvalidationSettings settings)
             : this(settings)
         {
-            this.Connection = RedisConnectionFactory.New(mux);
+            Connection = RedisConnectionFactory.New(mux);
         }
-        #endregion
 
         public void Start()
         {
-            this.Connection.Connect();
+            Connection.Connect();
             Connection.Subscribe(Constants.DEFAULT_INVALIDATION_CHANNEL, OnInvalidationMessage);
-            if (this.EnableKeySpaceNotifications)
+            if (EnableKeySpaceNotifications)
                 Connection.Subscribe(Constants.DEFAULT_KEYSPACE_CHANNEL, OnKeySpaceNotificationMessage);
         }
 
         public void Stop()
         {
-            this.Connection.Disconnect();
+            Connection.Disconnect();
         }
 
         public Task<long> NotifyAsync(string key)
         {
-            return this.Connection.PublishAsync(Constants.DEFAULT_INVALIDATION_CHANNEL, key);
+            return Connection.PublishAsync(Constants.DEFAULT_INVALIDATION_CHANNEL, key);
         }
 
-        #region Notification Handlers
         private void OnInvalidationMessage(RedisChannel pattern, RedisValue data)
         {
             if (pattern == Constants.DEFAULT_INVALIDATION_CHANNEL)
             {
-                this.ProcessInvalidationMessage(data.ToString());
+                ProcessInvalidationMessage(data.ToString());
             }
         }
 
@@ -76,25 +71,24 @@ namespace RedisMemoryCacheInvalidation.Core
             switch (prefix)
             {
                 case "__keyevent":
-                    this.ProcessInvalidationMessage(data.ToString());
+                    ProcessInvalidationMessage(data.ToString());
                     break;
                 default:
                     //nop
                     break;
             }
         }
-        #endregion
 
         private void ProcessInvalidationMessage(string key)
         {
-            if ((this.InvalidationStrategy & InvalidationStrategyType.ChangeMonitor) == InvalidationStrategyType.ChangeMonitor)
+            if ((InvalidationStrategy & InvalidationStrategyType.ChangeMonitor) == InvalidationStrategyType.ChangeMonitor)
                 Notifier.Notify(key);
 
-            if ((this.InvalidationStrategy & InvalidationStrategyType.AutoCacheRemoval) == InvalidationStrategyType.AutoCacheRemoval)
-                if (this.LocalCache != null)
-                    this.LocalCache.Remove(key);
+            if ((InvalidationStrategy & InvalidationStrategyType.AutoCacheRemoval) == InvalidationStrategyType.AutoCacheRemoval)
+                if (LocalCache != null)
+                    LocalCache.Remove(key);
 
-            if ((this.InvalidationStrategy & InvalidationStrategyType.External) == InvalidationStrategyType.External)
+            if ((InvalidationStrategy & InvalidationStrategyType.External) == InvalidationStrategyType.External)
                 if (NotificationCallback != null)
                     NotificationCallback?.Invoke(key);
 

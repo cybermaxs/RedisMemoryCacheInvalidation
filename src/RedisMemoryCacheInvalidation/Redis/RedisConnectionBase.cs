@@ -10,56 +10,53 @@ namespace RedisMemoryCacheInvalidation.Redis
     {
         protected IConnectionMultiplexer multiplexer;
 
-        #region IRedisConnection
         public bool IsConnected
         {
-            get { return this.multiplexer != null && this.multiplexer.IsConnected; }
+            get { return multiplexer != null && multiplexer.IsConnected; }
         }
 
         public void Subscribe(string channel, Action<RedisChannel, RedisValue> handler)
         {
-            if (this.IsConnected)
+            if (IsConnected)
             {
-                var subscriber = this.multiplexer.GetSubscriber();
+                var subscriber = multiplexer.GetSubscriber();
                 subscriber.Subscribe(channel, handler);
             }
         }
 
         public void UnsubscribeAll()
         {
-            if (this.IsConnected)
-                this.multiplexer.GetSubscriber().UnsubscribeAll();
+            if (IsConnected)
+                multiplexer.GetSubscriber().UnsubscribeAll();
         }
 
         public Task<long> PublishAsync(string channel, string value)
         {
-            if (this.IsConnected)
+            if (IsConnected)
             {
-                return this.multiplexer.GetSubscriber().PublishAsync(channel, value);
+                return multiplexer.GetSubscriber().PublishAsync(channel, value);
             }
             else
                 return TaskCache.FromResult(0L);
         }
         public Task<KeyValuePair<string, string>[]> GetConfigAsync()
         {
-            if (this.IsConnected)
+            if (IsConnected)
             {
-                var server = this.GetServer();
+                var server = GetServer();
                 return server.ConfigGetAsync();
             }
             else
                 return TaskCache.FromResult(new KeyValuePair<string, string>[] { });
         }
-        #endregion
 
-        #region privates
         protected IServer GetServer()
         {
-            var endpoints = this.multiplexer.GetEndPoints();
+            var endpoints = multiplexer.GetEndPoints();
             IServer result = null;
             foreach (var endpoint in endpoints)
             {
-                var server = this.multiplexer.GetServer(endpoint);
+                var server = multiplexer.GetServer(endpoint);
                 if (server.IsSlave || !server.IsConnected) continue;
                 if (result != null) throw new InvalidOperationException("Requires exactly one master endpoint (found " + server.EndPoint + " and " + result.EndPoint + ")");
                 result = server;
@@ -71,6 +68,5 @@ namespace RedisMemoryCacheInvalidation.Redis
         public abstract bool Connect();
 
         public abstract void Disconnect();
-        #endregion
     }
 }
