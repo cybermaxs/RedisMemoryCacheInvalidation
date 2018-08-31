@@ -38,7 +38,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Core
             unsub.Dispose();
 
             Assert.Equal(2, obs.Count);
-            Assert.False(obs.Contains(mock2.Object));            
+            Assert.False(obs.Contains(mock2.Object));
         }
     }
 }

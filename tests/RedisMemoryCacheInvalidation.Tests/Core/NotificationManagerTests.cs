@@ -25,7 +25,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Core
 
             Assert.NotNull(res);
             Assert.Equal(1, notifier.SubscriptionsByTopic.Values.Count);
-            Assert.True(notifier.SubscriptionsByTopic.Values.SelectMany(e=>e).Contains(mockOfObserver.Object));
+            Assert.Contains(mockOfObserver.Object, notifier.SubscriptionsByTopic.Values.SelectMany(e=>e));
             Assert.IsType<Unsubscriber>(res);
         }
 
@@ -41,7 +41,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Core
             Assert.NotNull(res1);
             Assert.NotSame(res1, res2);
             Assert.Equal(1, notifier.SubscriptionsByTopic.Values.Count);
-            Assert.True(notifier.SubscriptionsByTopic.Values.SelectMany(e => e).Contains(mockOfObserver.Object));
+            Assert.Contains(mockOfObserver.Object, notifier.SubscriptionsByTopic.Values.SelectMany(e => e));
             Assert.IsType<Unsubscriber>(res1);
         }
 
@@ -57,7 +57,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Core
 
             notifier.Notify(topciKey);
 
-            Assert.NotNull(!notifier.SubscriptionsByTopic.Values.SelectMany(e => e).Any());
+            Assert.True(notifier.SubscriptionsByTopic.Values.SelectMany(e => e).Any());
         }
     }
 }

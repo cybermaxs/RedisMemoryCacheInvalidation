@@ -16,7 +16,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Monitor
         private readonly Mock<INotificationManager<string>> mockOfBus;
         private readonly Mock<IDisposable> mockOfDispose;
 
-        INotificationManager<string> Bus { get { return mockOfBus.Object; } }
+        INotificationManager<string> Bus => mockOfBus.Object;
 
         public RedisChangeMonitorTest()
         {

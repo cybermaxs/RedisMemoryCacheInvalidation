@@ -25,7 +25,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             redisServer.Reset();
             redis = redisServer;
 
-            InvalidationManager.notificationBus = null;
+            InvalidationManager.NotificationBus = null;
             InvalidationManager.Configure(redis.GetEndpoint(), new InvalidationSettings {
                 InvalidationStrategy = InvalidationStrategyType.All,
                 EnableKeySpaceNotifications = true,

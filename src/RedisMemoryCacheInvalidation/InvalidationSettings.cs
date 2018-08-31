@@ -24,10 +24,10 @@ namespace RedisMemoryCacheInvalidation
 
         public InvalidationSettings()
         {
-            this.InvalidationStrategy = InvalidationStrategyType.All;
-            this.TargetCache = MemoryCache.Default;
-            this.EnableKeySpaceNotifications = false;
-            this.InvalidationCallback = null;
+            InvalidationStrategy = InvalidationStrategyType.All;
+            TargetCache = MemoryCache.Default;
+            EnableKeySpaceNotifications = false;
+            InvalidationCallback = null;
         }
     }
 }

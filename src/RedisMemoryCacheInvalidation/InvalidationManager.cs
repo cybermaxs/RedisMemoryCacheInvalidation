@@ -9,34 +9,31 @@ using System.Threading.Tasks;
 namespace RedisMemoryCacheInvalidation
 {
     /// <summary>
-    /// Libray's entry point. 
+    /// InvalidationManager
+    /// Entry-point to library
     /// </summary>
     public static class InvalidationManager
     {
-        internal static IRedisNotificationBus notificationBus;
+        internal static IRedisNotificationBus NotificationBus;
 
         /// <summary>
         /// Redis connection state : connected or not.
         /// </summary>
-        public static bool IsConnected
-        {
-            get {return notificationBus!=null && notificationBus.Connection.IsConnected;}
-        }
+        public static bool IsConnected => NotificationBus!=null && NotificationBus.Connection.IsConnected;
 
-        #region Setup
         /// <summary>
         /// Use to Configure Redis MemoryCache Invalidation.
         /// A new redis connection will be establish based upon parameter redisConfig.
         /// </summary>
         /// <param name="redisConfig">StackExchange configuration settings.</param>
         /// <param name="settings">InvalidationManager settings.(</param>
-        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
+        /// <returns>Task when connection is opened and subscribed to pubsub events.</returns>
         public static void Configure(string redisConfig, InvalidationSettings settings)
         {
-            if (notificationBus == null)
+            if (NotificationBus == null)
             {
-                notificationBus = new RedisNotificationBus(redisConfig, settings);
-                notificationBus.Start();
+                NotificationBus = new RedisNotificationBus(redisConfig, settings);
+                NotificationBus.Start();
             }
         }
 
@@ -45,18 +42,16 @@ namespace RedisMemoryCacheInvalidation
         /// </summary>
         /// <param name="mux">Reusing an existing ConnectionMultiplexer.</param>
         /// <param name="settings">InvalidationManager settings.(</param>
-        /// <returns>Task when connection is opened and subcribed to pubsub events.</returns>
+        /// <returns>Task when connection is opened and subscribed to pubsub events.</returns>
         public static void Configure(ConnectionMultiplexer mux, InvalidationSettings settings)
         {
-            if (notificationBus == null)
+            if (NotificationBus == null)
             {
-                notificationBus = new RedisNotificationBus(mux, settings);
-                notificationBus.Start();
+                NotificationBus = new RedisNotificationBus(mux, settings);
+                NotificationBus.Start();
             }
         }
-        #endregion
 
-        #region CreateMonitor
         /// <summary>
         /// Allow to create a custom ChangeMonitor depending on the pubsub event (channel : invalidate, data:invalidationKey)
         /// </summary>
@@ -68,16 +63,16 @@ namespace RedisMemoryCacheInvalidation
 
             EnsureConfiguration();
 
-            if (notificationBus.InvalidationStrategy == InvalidationStrategyType.AutoCacheRemoval)
+            if (NotificationBus.InvalidationStrategy == InvalidationStrategyType.AutoCacheRemoval)
                 throw new InvalidOperationException("Could not create a change monitor when InvalidationStrategy is DefaultMemoryCacheRemoval");
 
-            return new RedisChangeMonitor(notificationBus.Notifier, invalidationKey);
+            return new RedisChangeMonitor(NotificationBus.Notifier, invalidationKey);
         }
 
         /// <summary>
         /// Allow to create a custom ChangeMonitor depending on the pubsub event (channel : invalidate, data:item.Key)
         /// </summary>
-        /// <param name="item">todo: describe item parameter on CreateChangeMonitor</param>
+        /// <param name="item">Cache item</param>
         /// <returns>RedisChangeMonitor watching for notifications</returns>
         public static RedisChangeMonitor CreateChangeMonitor(CacheItem item)
         {
@@ -85,13 +80,12 @@ namespace RedisMemoryCacheInvalidation
 
             EnsureConfiguration();
 
-            return new RedisChangeMonitor(notificationBus.Notifier, item.Key);
+            return new RedisChangeMonitor(NotificationBus.Notifier, item.Key);
         }
-        #endregion
 
         /// <summary>
         /// Used to send invalidation message for a key.
-        /// Shortcut for PUBLISH invalidate key. 
+        /// Shortcut for PUBLISH invalidate key.
         /// </summary>
         /// <param name="key"></param>
         /// <returns>Task with the number of subscribers</returns>
@@ -101,12 +95,12 @@ namespace RedisMemoryCacheInvalidation
 
             EnsureConfiguration();
 
-            return notificationBus.NotifyAsync(key);
+            return NotificationBus.NotifyAsync(key);
         }
 
         private static void EnsureConfiguration()
         {
-            if (notificationBus == null)
+            if (NotificationBus == null)
                 throw new InvalidOperationException("Configure() was not called");
         }
     }

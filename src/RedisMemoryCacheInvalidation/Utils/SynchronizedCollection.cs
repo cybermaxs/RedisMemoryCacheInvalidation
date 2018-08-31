@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
 
 namespace RedisMemoryCacheInvalidation.Utils
 {
     /// <summary>
     /// Inspired by System.ServiceModel.SynchronizedCollection
-    /// https://github.com/Microsoft/referencesource/blob/master/System.ServiceModel/System/ServiceModel/SynchronizedCollection.cs 
+    /// https://github.com/Microsoft/referencesource/blob/master/System.ServiceModel/System/ServiceModel/SynchronizedCollection.cs
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [ExcludeFromCodeCoverage]
@@ -20,53 +17,53 @@ namespace RedisMemoryCacheInvalidation.Utils
 
         public SynchronizedCollection()
         {
-            this.items = new List<T>();
-            this.sync = new object();
+            items = new List<T>();
+            sync = new object();
         }
 
         public int Count
         {
-            get { lock (this.sync) { return this.items.Count; } }
+            get { lock (sync) { return items.Count; } }
         }
 
         public void Add(T item)
         {
-            lock (this.sync)
+            lock (sync)
             {
-                int index = this.items.Count;
-                this.items.Insert(index, item);
+                int index = items.Count;
+                items.Insert(index, item);
             }
         }
 
         public void Clear()
         {
-            lock (this.sync)
+            lock (sync)
             {
-                this.items.Clear();
+                items.Clear();
             }
         }
 
         public void CopyTo(T[] array, int index)
         {
-            lock (this.sync)
+            lock (sync)
             {
-                this.items.CopyTo(array, index);
+                items.CopyTo(array, index);
             }
         }
 
         public bool Contains(T item)
         {
-            lock (this.sync)
+            lock (sync)
             {
-                return this.items.Contains(item);
+                return items.Contains(item);
             }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            lock (this.sync)
+            lock (sync)
             {
-                return this.items.GetEnumerator();
+                return items.GetEnumerator();
             }
         }
 
@@ -76,7 +73,7 @@ namespace RedisMemoryCacheInvalidation.Utils
 
             for (int i = 0; i < count; i++)
             {
-                if (object.Equals(items[i], item))
+                if (Equals(items[i], item))
                 {
                     return i;
                 }
@@ -86,25 +83,22 @@ namespace RedisMemoryCacheInvalidation.Utils
 
         public bool Remove(T item)
         {
-            lock (this.sync)
+            lock (sync)
             {
-                int index = this.InternalIndexOf(item);
+                int index = InternalIndexOf(item);
                 if (index < 0)
                     return false;
 
-                this.items.RemoveAt(index);
+                items.RemoveAt(index);
                 return true;
             }
         }
 
-        bool ICollection<T>.IsReadOnly
-        {
-            get { return false; }
-        }
+        bool ICollection<T>.IsReadOnly => false;
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IList)this.items).GetEnumerator();
+            return ((IList)items).GetEnumerator();
         }
     }
 }

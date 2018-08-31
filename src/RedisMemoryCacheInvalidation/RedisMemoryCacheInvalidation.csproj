@@ -3,12 +3,19 @@
     <TargetFrameworks>netstandard2.0;net472;net462</TargetFrameworks>
     <AssemblyTitle>RedisMemoryCacheInvalidation</AssemblyTitle>
     <Company>Cybermaxs</Company>
+    <Author>Cybermaxs</Author>
     <Product>RedisMemoryCacheInvalidation</Product>
-    <Description></Description>
     <Copyright>Copyright © Lemaitre 2018</Copyright>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <AssemblyVersion>1.0.14474.1</AssemblyVersion>
-    <FileVersion>1.0.14474.1</FileVersion>
+    <OutputTypeEx>Library</OutputTypeEx>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSource>true</IncludeSource>
+
+    <PackageId>RedisMemoryCacheInvalidation</PackageId>
+    <Title>RedisMemoryCacheInvalidation</Title>
+    <Summary>A redis-powered local memory cache invalidation mechanism.</Summary>
+    <Description>This package allow to invalidate local memory cache items with the help of StackExchange.Redis</Description>
+
+    <Version>2.0.1</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>full</DebugType>
