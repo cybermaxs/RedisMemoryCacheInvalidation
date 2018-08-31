@@ -1,11 +1,11 @@
-﻿using Ploeh.AutoFixture;
-using RedisMemoryCacheInvalidation.Monitor;
+﻿using RedisMemoryCacheInvalidation.Monitor;
 using RedisMemoryCacheInvalidation.Tests;
 using RedisMemoryCacheInvalidation.Tests.Fixtures;
 using System;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading;
+using AutoFixture;
 using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Integration.Tests
@@ -26,7 +26,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             redis = redisServer;
 
             InvalidationManager.notificationBus = null;
-            InvalidationManager.Configure("localhost:6379", new InvalidationSettings {
+            InvalidationManager.Configure(redis.GetEndpoint(), new InvalidationSettings {
                 InvalidationStrategy = InvalidationStrategyType.All,
                 EnableKeySpaceNotifications = true,
                 TargetCache = localCache });
@@ -51,16 +51,16 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             Assert.False(monitor1.IsDisposed, "should not be removed before notification");
             Assert.False(monitor2.IsDisposed, "should not be removed before notification");
 
-            //act 
+            //act
             var subscriber = redis.GetSubscriber();
             subscriber.Publish(Constants.DEFAULT_INVALIDATION_CHANNEL, Encoding.Default.GetBytes(invalidationKey));
 
-            // hack wait for notif
+            // hack wait for notification
             Thread.Sleep(50);
 
             //assert
-            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item shoud be removed");
-            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item shoud be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item should be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item should be removed");
             Assert.True(monitor1.IsDisposed, "should be disposed");
             Assert.True(monitor2.IsDisposed, "should be disposed");
         }
@@ -76,7 +76,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
 
             Assert.Equal(2, localCache.GetCount());
 
-            // act 
+            // act
             InvalidationManager.InvalidateAsync(baseCacheKey + "1").Wait();
             InvalidationManager.InvalidateAsync(baseCacheKey + "2").Wait();
 
@@ -84,8 +84,8 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
 
             //assert
             Assert.Equal(0, localCache.GetCount());
-            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item shoud be removed");
-            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item shoud be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item should be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item should be removed");
         }
 
 
@@ -102,7 +102,7 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
             CreateCacheItemAndAdd(localCache, baseCacheKey + "1", monitor1);
             CreateCacheItemAndAdd(localCache, baseCacheKey + "2", monitor2);
 
-            // act 
+            // act
             var db = redis.GetDatabase(0);
             db.StringSet(invalidationKey, "notused");
 
@@ -110,8 +110,8 @@ namespace RedisMemoryCacheInvalidation.Integration.Tests
 
             //assert
             Assert.Equal(0, localCache.GetCount());
-            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item shoud be removed");
-            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item shoud be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "1"), "cache item should be removed");
+            Assert.False(localCache.Contains(baseCacheKey + "2"), "cache item should be removed");
         }
 
         private static CacheItem CreateCacheItemAndAdd(MemoryCache target, string cacheKey, RedisChangeMonitor monitor = null)

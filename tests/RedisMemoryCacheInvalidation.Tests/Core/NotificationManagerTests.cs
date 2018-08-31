@@ -1,9 +1,9 @@
 ﻿using System.Linq;
+using AutoFixture;
 using RedisMemoryCacheInvalidation.Core;
 using RedisMemoryCacheInvalidation.Core.Interfaces;
 using Moq;
 using Xunit;
-using Ploeh.AutoFixture;
 
 namespace RedisMemoryCacheInvalidation.Tests.Core
 {
@@ -57,7 +57,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Core
 
             notifier.Notify(topciKey);
 
-            Assert.NotNull(notifier.SubscriptionsByTopic.Values.SelectMany(e => e).Count() == 0); 
+            Assert.NotNull(!notifier.SubscriptionsByTopic.Values.SelectMany(e => e).Any());
         }
     }
 }

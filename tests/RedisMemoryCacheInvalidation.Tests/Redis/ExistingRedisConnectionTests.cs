@@ -1,10 +1,10 @@
 ﻿using Moq;
-using Ploeh.AutoFixture;
-using RedisMemoryCacheInvalidation.Redis;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using AutoFixture;
 using Xunit;
+using RedisMemoryCacheInvalidation.Redis;
 
 namespace RedisMemoryCacheInvalidation.Tests.Redis
 {
@@ -16,7 +16,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Redis
         private Fixture fixture = new Fixture();
 
         public ExistingRedisConnectionTests()
-        {       
+        {
             //mock of subscriber
             mockOfSubscriber = new Mock<ISubscriber>();
             mockOfSubscriber.Setup(s => s.UnsubscribeAll(It.IsAny<CommandFlags>()));
@@ -54,7 +54,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Redis
 
             cnx.UnsubscribeAll();
             cnx.Disconnect();
-           
+
             mockOfMux.Verify(c => c.IsConnected, Times.AtLeastOnce);
             mockOfMux.Verify(c => c.GetSubscriber(null), Times.Never);
             mockOfMux.Verify(c => c.Close(It.IsAny<bool>()), Times.Never);
@@ -99,7 +99,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Redis
         public void WhenSubscribe_ShouldSubscribe()
         {
             var channel = fixture.Create<string>();
-            Action<RedisChannel, RedisValue> action = (c, v) => { }; 
+            Action<RedisChannel, RedisValue> action = (c, v) => { };
 
             cnx.Subscribe(channel, action);
 

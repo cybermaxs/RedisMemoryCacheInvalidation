@@ -1,68 +1,54 @@
 ﻿using System;
-using System.Linq;
-using System.Diagnostics;
-using StackExchange.Redis;
 using System.Threading;
+using System.Threading.Tasks;
+using StackExchange.Redis;
 
 namespace RedisMemoryCacheInvalidation.Tests.Fixtures
 {
     public class RedisServerFixture : IDisposable
     {
-        private Process server;
-        private ConnectionMultiplexer mux;
-
-        private bool wasStarted;
+        private static RedisInside.Redis redis;
+        private static string RedisEndpoint;
+        private readonly ConnectionMultiplexer mux;
 
         public RedisServerFixture()
         {
-            if (!IsRunning)
-            {
-                this.server = Process.Start(@"..\..\..\..\packages\Redis-64.2.8.21\redis-server.exe");
-                wasStarted = true;
-            }
-            Thread.Sleep(1000);
-            this.mux = ConnectionMultiplexer.Connect("localhost:6379,allowAdmin=true");
-            this.mux.GetServer("localhost: 6379").ConfigSet("notify-keyspace-events", "KEA");
+            redis = new RedisInside.Redis();
+            Thread.Sleep(100);
+            mux = ConnectionMultiplexer.Connect(new ConfigurationOptions { AllowAdmin = true, AbortOnConnectFail = false, EndPoints = { redis.Endpoint } });
+            RedisEndpoint = redis.Endpoint.ToString();
+            mux.GetServer(redis.Endpoint.ToString()).ConfigSet("notify-keyspace-events", "KEA");
+
+            mux.GetDatabase().StringSetAsync("key", "value");
+            var actualValue = mux.GetDatabase().StringGetAsync("key"); ;
         }
+
+        public static bool IsRunning => redis != null;
 
         public void Dispose()
         {
-            if (this.mux != null && this.mux.IsConnected)
-                this.mux.Close(false);
-
-            if (server != null && !server.HasExited && wasStarted)
-                server.Kill();
+            if (mux != null && mux.IsConnected)
+                mux.Close(false);
+            redis.Dispose();
         }
 
         public IDatabase GetDatabase(int db)
         {
-            return this.mux.GetDatabase(db);
+            return mux.GetDatabase(db);
+        }
+        public string GetEndpoint()
+        {
+            return RedisEndpoint;
         }
 
         public ISubscriber GetSubscriber()
         {
-            return this.mux.GetSubscriber();
-        }
-
-        public static bool IsRunning
-        {
-            get
-            {
-                return Process.GetProcessesByName("redis-server").Count() > 0;
-            }
+            return mux.GetSubscriber();
         }
 
         public void Reset()
         {
-            this.mux.GetServer("localhost:6379").FlushAllDatabases();
-        }
-
-        public static void Kill()
-        {
-            foreach (var p in Process.GetProcessesByName(@"redis-server"))
-            {
-                p.Kill();
-            }
+            mux.GetServer(redis.Endpoint.ToString()).FlushAllDatabases();
         }
     }
 }

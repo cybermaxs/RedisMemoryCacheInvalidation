@@ -1,9 +1,9 @@
 ﻿using Moq;
-using Ploeh.AutoFixture;
 using RedisMemoryCacheInvalidation.Core;
 using RedisMemoryCacheInvalidation.Core.Interfaces;
 using RedisMemoryCacheInvalidation.Monitor;
 using System;
+using AutoFixture;
 using Xunit;
 
 namespace RedisMemoryCacheInvalidation.Tests.Monitor
@@ -17,7 +17,7 @@ namespace RedisMemoryCacheInvalidation.Tests.Monitor
         private readonly Mock<IDisposable> mockOfDispose;
 
         INotificationManager<string> Bus { get { return mockOfBus.Object; } }
-        
+
         public RedisChangeMonitorTest()
         {
             mockOfDispose = new Mock<IDisposable>();
