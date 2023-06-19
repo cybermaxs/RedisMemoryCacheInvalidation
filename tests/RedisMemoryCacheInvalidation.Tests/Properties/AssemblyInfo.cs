@@ -33,7 +33,7 @@ using Xunit;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2.88")]
-[assembly: AssemblyFileVersion("2.2.88")]
+[assembly: AssemblyVersion("2.5.61")]
+[assembly: AssemblyFileVersion("2.5.61")]
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
