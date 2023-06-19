@@ -15,7 +15,7 @@
     <tags>Redis Cache Invalidation MemoryCache NoSQL PubSub</tags>
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="StackExchange.Redis" version="2.0.601" />
+        <dependency id="StackExchange.Redis" version="2.1.58" />
       </group>
     </dependencies>
   </metadata>
